@@ -1,0 +1,83 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+.city-view {
+  display: grid;
+  gap: $space-3;
+}
+
+.city-view__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-2;
+}
+
+.city-view__mode {
+  margin: 0;
+  color: rgba(248, 251, 246, 0.78);
+  font-size: 0.9rem;
+}
+
+.city-view__reset {
+  min-height: 2.5rem;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid rgba(248, 251, 246, 0.28);
+  border-radius: $radius-sm;
+  background: transparent;
+  color: $color-white;
+  font-family: $font-display;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.city-view__reset:hover,
+.city-view__reset:focus-visible {
+  border-color: $color-lime;
+  color: $color-lime;
+}
+
+.city-view__viewport {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: calc(#{$radius-lg} - 0.4rem);
+  background: rgba(8, 36, 30, 0.55);
+}
+
+.city3d-host {
+  width: 100%;
+  height: min(48vh, 26rem);
+  min-height: 15rem;
+  max-width: 100%;
+}
+
+.city3d-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  vertical-align: top;
+}
+
+@include respond-up($bp-md) {
+  .city3d-host {
+    height: min(52vh, 30rem);
+    min-height: 18rem;
+  }
+}
+
+@include respond-up($bp-lg) {
+  .city3d-host {
+    height: min(56vh, 34rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .city-view__reset {
+    transition: none;
+  }
+}

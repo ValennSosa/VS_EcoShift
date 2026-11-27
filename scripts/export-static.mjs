@@ -56,11 +56,30 @@ cpSync(
   join(out, "node_modules/@kurkle/color/dist/color.esm.js")
 );
 
+// Three.js ESM: three.module.js importa ./three.core.js; OrbitControls importa "three".
+mkdirSync(join(out, "node_modules/three/build"), { recursive: true });
+mkdirSync(join(out, "node_modules/three/examples/jsm/controls"), { recursive: true });
+cpSync(
+  "node_modules/three/build/three.module.js",
+  join(out, "node_modules/three/build/three.module.js")
+);
+cpSync(
+  "node_modules/three/build/three.core.js",
+  join(out, "node_modules/three/build/three.core.js")
+);
+cpSync(
+  "node_modules/three/examples/jsm/controls/OrbitControls.js",
+  join(out, "node_modules/three/examples/jsm/controls/OrbitControls.js")
+);
+
 const requiredOutFiles = [
   "node_modules/chart.js/dist/chart.js",
   "node_modules/chart.js/auto/auto.js",
   "node_modules/chart.js/dist/chunks/helpers.dataset.js",
   "node_modules/@kurkle/color/dist/color.esm.js",
+  "node_modules/three/build/three.module.js",
+  "node_modules/three/build/three.core.js",
+  "node_modules/three/examples/jsm/controls/OrbitControls.js",
 ];
 
 const missing = [];

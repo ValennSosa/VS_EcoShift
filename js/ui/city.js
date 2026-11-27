@@ -1,3 +1,4 @@
+import { resolveCityViewMode, detectWebGL } from "../city3d/detect.js";
 import { VARIABLE_KEYS } from "../sim/engine.js";
 import { ZONE_DEFINITIONS, calculateZoneStates, getZoneState } from "../sim/zones.js";
 
@@ -15,6 +16,10 @@ let selectedId = null;
 let latestStates = null;
 let onSelectCallback = null;
 let labelResizeObserver = null;
+let viewMode = "svg";
+let city3d = null;
+let stageRoot = null;
+let pageHideBound = null;
 
 const CITY_VIEWBOX_WIDTH = 920;
 const LABEL_SCREEN_PX = 14;
@@ -22,15 +27,179 @@ const LABEL_SCREEN_PX = 14;
 export async function initCity({ stage, panel: panelNode, liveRegion, onSelect }) {
   if (!stage || !panelNode) return null;
 
+  disposeCityView();
+
   panel = panelNode;
   live = liveRegion || null;
   onSelectCallback = typeof onSelect === "function" ? onSelect : null;
+  stageRoot = stage;
+  selectedId = null;
+  latestStates = null;
+  root = null;
+  city3d = null;
 
+  stage.replaceChildren();
+
+  const shell = document.createElement("div");
+  shell.className = "city-view";
+
+  const toolbar = document.createElement("div");
+  toolbar.className = "city-view__toolbar";
+
+  const modeNote = document.createElement("p");
+  modeNote.className = "city-view__mode";
+
+  const resetBtn = document.createElement("button");
+  resetBtn.type = "button";
+  resetBtn.className = "city-view__reset";
+  resetBtn.textContent = "Restablecer vista";
+  resetBtn.hidden = true;
+  resetBtn.addEventListener("click", () => {
+    city3d?.resetCamera?.();
+  });
+
+  toolbar.append(modeNote, resetBtn);
+
+  const viewport = document.createElement("div");
+  viewport.className = "city-view__viewport";
+
+  chipBox = document.createElement("div");
+  chipBox.className = "city-zone-chips";
+  chipBox.setAttribute("role", "group");
+  chipBox.setAttribute("aria-label", "Zonas de la ciudad");
+
+  const caption = document.createElement("p");
+  caption.className = "city-stage__caption";
+  caption.textContent =
+    "Elegí una zona en la lista (o en el mapa SVG). La selección no modifica los controles ni el resultado del motor.";
+
+  shell.append(toolbar, viewport, chipBox, caption);
+  stage.append(shell);
+
+  const preferred = resolveCityViewMode();
+  let mounted = false;
+
+  if (preferred === "3d" && detectWebGL()) {
+    try {
+      // Interruptor de prueba: localStorage vs-ecoshift:city3d-fail=1
+      let forceFail = false;
+      try {
+        forceFail = window.localStorage.getItem("vs-ecoshift:city3d-fail") === "1";
+      } catch {
+        forceFail = false;
+      }
+      if (forceFail) throw new Error("Fallo forzado de inicialización 3D");
+      const { createCity3D } = await import("../city3d/index.js");
+      city3d = createCity3D({ host: viewport });
+      viewMode = "3d";
+      modeNote.textContent = "Vista 3D de la ciudad";
+      resetBtn.hidden = false;
+      mounted = true;
+    } catch (error) {
+      console.warn("No se pudo iniciar la ciudad 3D; se usa el SVG.", error);
+      city3d = null;
+    }
+  }
+
+  if (!mounted) {
+    await mountSvgInto(viewport);
+    viewMode = "svg";
+    modeNote.textContent =
+      preferred === "3d"
+        ? "Vista SVG (fallback: WebGL no disponible o fallo 3D)"
+        : "Vista SVG";
+    resetBtn.hidden = true;
+  }
+
+  mountZoneChips(viewMode === "svg");
+  renderPanel(null);
+
+  pageHideBound = () => disposeCityView();
+  window.addEventListener("pagehide", pageHideBound, { once: true });
+
+  return { selectZone, updateCity, getSelectedId: () => selectedId, getViewMode: () => viewMode };
+}
+
+export function updateCity(variables) {
+  if (!stageRoot) return null;
+  latestStates = calculateZoneStates(variables);
+
+  if (viewMode === "svg" && root) {
+    for (const key of VARIABLE_KEYS) {
+      root.setAttribute(`data-v-${toKebab(key)}`, latestStates.variableLevels[key]);
+    }
+    for (const zone of latestStates.zones) {
+      const node = root.querySelector(`[data-zone="${zone.id}"]`);
+      if (!node) continue;
+      node.setAttribute("data-level", zone.level);
+    }
+  }
+
+  if (viewMode === "3d" && city3d) {
+    city3d.applyVisualState(latestStates);
+  }
+
+  if (selectedId) renderPanel(getZoneState(latestStates, selectedId));
+  return latestStates;
+}
+
+export function selectZone(zoneId) {
+  if (!ZONE_DEFINITIONS.some((zone) => zone.id === zoneId)) return;
+  if (viewMode === "svg" && !root) return;
+
+  selectedId = zoneId;
+
+  for (const definition of ZONE_DEFINITIONS) {
+    const chip = chipBox?.querySelector(`[data-zone-target="${definition.id}"]`);
+    const active = definition.id === zoneId;
+    if (chip) chip.setAttribute("aria-pressed", String(active));
+    if (root) {
+      const node = root.querySelector(`[data-zone="${definition.id}"]`);
+      node?.classList.toggle("is-selected", active);
+    }
+  }
+
+  const state = latestStates ? getZoneState(latestStates, zoneId) : null;
+  renderPanel(state);
+
+  if (live && state) {
+    live.textContent = `Zona seleccionada: ${state.name}. Nivel ${LEVEL_LABELS[state.level]}.`;
+  }
+
+  onSelectCallback?.(zoneId);
+}
+
+function mountZoneChips(wireSvgHits) {
+  if (!chipBox) return;
+  chipBox.replaceChildren();
+
+  for (const definition of ZONE_DEFINITIONS) {
+    if (wireSvgHits && root) {
+      const zone = root.querySelector(`[data-zone="${definition.id}"]`);
+      if (zone) {
+        zone.classList.add("city-zone");
+        zone.style.cursor = "pointer";
+        zone.addEventListener("click", () => selectZone(definition.id));
+      }
+    }
+
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "city-zone-chip";
+    chip.dataset.zoneTarget = definition.id;
+    chip.setAttribute("aria-pressed", "false");
+    chip.textContent = definition.name;
+    chip.addEventListener("click", () => selectZone(definition.id));
+    chipBox.append(chip);
+  }
+}
+
+async function mountSvgInto(viewport) {
   const response = await fetch("./assets/city/city.svg");
   if (!response.ok) throw new Error("No se pudo cargar la ciudad.");
   const markup = await response.text();
-  stage.replaceChildren();
 
+  viewport.replaceChildren();
   const frame = document.createElement("div");
   frame.className = "city-canvas-wrap";
   frame.innerHTML = markup;
@@ -44,36 +213,8 @@ export async function initCity({ stage, panel: panelNode, liveRegion, onSelect }
   svg.setAttribute("aria-hidden", "true");
   svg.classList.add("city-canvas");
   root = svg;
+  viewport.append(frame);
 
-  chipBox = document.createElement("div");
-  chipBox.className = "city-zone-chips";
-  chipBox.setAttribute("role", "group");
-  chipBox.setAttribute("aria-label", "Zonas de la ciudad");
-
-  for (const definition of ZONE_DEFINITIONS) {
-    const zone = svg.querySelector(`[data-zone="${definition.id}"]`);
-    if (!zone) continue;
-
-    zone.classList.add("city-zone");
-    zone.style.cursor = "pointer";
-    zone.addEventListener("click", () => selectZone(definition.id));
-
-    const chip = document.createElement("button");
-    chip.type = "button";
-    chip.className = "city-zone-chip";
-    chip.dataset.zoneTarget = definition.id;
-    chip.setAttribute("aria-pressed", "false");
-    chip.textContent = definition.name;
-    chip.addEventListener("click", () => selectZone(definition.id));
-    chipBox.append(chip);
-  }
-
-  const caption = document.createElement("p");
-  caption.className = "city-stage__caption";
-  caption.textContent =
-    "Elegí una zona en el mapa o en la lista. La selección no modifica los controles ni el resultado del motor.";
-
-  stage.append(frame, chipBox, caption);
   syncZoneLabelSizes();
   if (typeof ResizeObserver === "function") {
     labelResizeObserver?.disconnect();
@@ -82,49 +223,22 @@ export async function initCity({ stage, panel: panelNode, liveRegion, onSelect }
   } else {
     window.addEventListener("resize", syncZoneLabelSizes);
   }
-  renderPanel(null);
-  return { selectZone, updateCity, getSelectedId: () => selectedId };
 }
 
-export function updateCity(variables) {
-  if (!root) return null;
-  latestStates = calculateZoneStates(variables);
-
-  for (const key of VARIABLE_KEYS) {
-    root.setAttribute(`data-v-${toKebab(key)}`, latestStates.variableLevels[key]);
+function disposeCityView() {
+  if (pageHideBound) {
+    window.removeEventListener("pagehide", pageHideBound);
+    pageHideBound = null;
   }
-
-  for (const zone of latestStates.zones) {
-    const node = root.querySelector(`[data-zone="${zone.id}"]`);
-    if (!node) continue;
-    node.setAttribute("data-level", zone.level);
-  }
-
-  if (selectedId) renderPanel(getZoneState(latestStates, selectedId));
-  return latestStates;
-}
-
-export function selectZone(zoneId) {
-  if (!root || !ZONE_DEFINITIONS.some((zone) => zone.id === zoneId)) return;
-
-  selectedId = zoneId;
-
-  for (const definition of ZONE_DEFINITIONS) {
-    const node = root.querySelector(`[data-zone="${definition.id}"]`);
-    const chip = chipBox?.querySelector(`[data-zone-target="${definition.id}"]`);
-    const active = definition.id === zoneId;
-    node?.classList.toggle("is-selected", active);
-    if (chip) chip.setAttribute("aria-pressed", String(active));
-  }
-
-  const state = latestStates ? getZoneState(latestStates, zoneId) : null;
-  renderPanel(state);
-
-  if (live && state) {
-    live.textContent = `Zona seleccionada: ${state.name}. Nivel ${LEVEL_LABELS[state.level]}.`;
-  }
-
-  onSelectCallback?.(zoneId);
+  city3d?.dispose?.();
+  city3d = null;
+  labelResizeObserver?.disconnect();
+  labelResizeObserver = null;
+  window.removeEventListener("resize", syncZoneLabelSizes);
+  root = null;
+  chipBox = null;
+  stageRoot = null;
+  viewMode = "svg";
 }
 
 function renderPanel(zone) {
