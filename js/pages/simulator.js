@@ -1,5 +1,6 @@
 import { VARIABLE_KEYS, simulate } from "../sim/engine.js";
 import { getBaselineVariables, getVariables, initState, resetVariables, setVariables } from "../state/store.js";
+import { initCity, updateCity } from "../ui/city.js";
 import { renderControls, syncControls } from "../ui/controls.js";
 import { renderIndicators, updateIndicators, updateSummary } from "../ui/indicators.js";
 
@@ -9,7 +10,10 @@ export async function initSimulator() {
   const indicators = document.querySelector("[data-indicators]");
   const score = document.querySelector("[data-score]");
   const summary = document.querySelector("[data-live-summary]");
-  if (!bar || !controls || !indicators || !score || !summary) return;
+  const zoneLive = document.querySelector("[data-live-zone]");
+  const stage = document.querySelector("[data-city-stage]");
+  const zonePanel = document.querySelector("[data-zone-panel]");
+  if (!bar || !controls || !indicators || !score || !summary || !zoneLive || !stage || !zonePanel) return;
 
   try {
     const response = await fetch("./data/presets.json");
@@ -21,11 +25,18 @@ export async function initSimulator() {
     initState(baselinePreset.variables);
     const baselineResult = simulate(getBaselineVariables());
 
+    await initCity({
+      stage,
+      panel: zonePanel,
+      liveRegion: zoneLive,
+    });
+
     function publish(rawVariables, announce) {
       const result = simulate(rawVariables);
       setVariables(result.variables);
       syncControls(controls, result.variables);
       updateIndicators(indicators, score, result, baselineResult);
+      updateCity(result.variables);
       markSelectedPreset(bar, presets, result.variables);
       if (announce) updateSummary(summary, result, baselineResult);
     }
@@ -39,15 +50,10 @@ export async function initSimulator() {
       () => updateSummary(summary, simulate(getVariables()), baselineResult)
     );
 
-    renderScenarioBar(
-      bar,
-      presets,
-      () => {
-        resetVariables();
-        publish(getVariables(), true);
-      },
-      (variables) => publish({ ...variables }, true)
-    );
+    renderScenarioBar(bar, presets, () => {
+      resetVariables();
+      publish(getVariables(), true);
+    }, (variables) => publish({ ...variables }, true));
 
     renderIndicators(indicators);
     publish(getVariables(), false);
@@ -55,6 +61,7 @@ export async function initSimulator() {
     bar.replaceChildren(message("No se pudieron cargar los escenarios de referencia."));
     controls.replaceChildren(messageItem("Los controles no están disponibles."));
     indicators.replaceChildren(messageItem("Las lecturas no están disponibles."));
+    stage.replaceChildren(message("No se pudo cargar la ciudad interactiva."));
     score.textContent = "";
   }
 }
