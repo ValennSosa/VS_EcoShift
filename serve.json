@@ -1,0 +1,28 @@
+{
+  "cleanUrls": false,
+  "trailingSlash": false,
+  "directoryListing": false,
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/index.html"
+    }
+  ],
+  "unlisted": [
+    ".git",
+    ".vercel",
+    ".vercel-out",
+    "node_modules",
+    "scss",
+    "tests",
+    "scripts",
+    ".gitignore",
+    "package.json",
+    "package-lock.json",
+    "vercel.json",
+    "serve.json",
+    "README.md",
+    "Indicación_inicial.txt",
+    "prompt 1.txt"
+  ]
+}

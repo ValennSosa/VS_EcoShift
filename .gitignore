@@ -5,8 +5,7 @@ node_modules/
 Thumbs.db
 *.log
 .env*
+*.css.map
 Indicación_inicial.txt
 prompt 1.txt
 prompt*.txt
-
-.vercel
