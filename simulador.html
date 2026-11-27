@@ -5,11 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Simulador — VS EcoShift</title>
   <meta name="description" content="Simulador educativo de VS EcoShift. Ajustá siete decisiones y mirá cómo se recalculan las lecturas de una ciudad ficticia.">
+  <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#0c342b">
-  <meta property="og:title" content="Simulador — VS EcoShift">
-  <meta property="og:description" content="La ciudad, los controles y las lecturas van a compartir esta pantalla.">
+  <link rel="canonical" href="https://vs-ecoshift.vercel.app/simulador.html">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_AR">
+  <meta property="og:site_name" content="VS EcoShift">
+  <meta property="og:title" content="Simulador — VS EcoShift">
+  <meta property="og:description" content="Ajustá siete decisiones urbanas y observá indicadores, gráficos y una ciudad ficticia que responde en tiempo real.">
+  <meta property="og:url" content="https://vs-ecoshift.vercel.app/simulador.html">
+  <meta property="og:image" content="https://vs-ecoshift.vercel.app/assets/brand/og-cover.png">
+  <meta property="og:image:width" content="1424">
+  <meta property="og:image:height" content="752">
+  <meta property="og:image:alt" content="VS EcoShift: portada del simulador educativo de sostenibilidad urbana">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Simulador — VS EcoShift">
+  <meta name="twitter:description" content="Ajustá siete decisiones urbanas y observá indicadores, gráficos y una ciudad ficticia que responde en tiempo real.">
+  <meta name="twitter:image" content="https://vs-ecoshift.vercel.app/assets/brand/og-cover.png">
+  <meta name="twitter:image:alt" content="VS EcoShift: portada del simulador educativo de sostenibilidad urbana">
   <link rel="icon" href="./assets/brand/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -109,7 +122,18 @@
           </div>
         </section>
 
+        <section class="panel challenge-panel" aria-labelledby="desafios-sim-titulo">
+          <p class="panel__label">Desafíos</p>
+          <h2 id="desafios-sim-titulo">Metas educativas</h2>
+          <p>Se actualizan con cada cambio. Cumplido o pendiente se indica en texto; el color solo refuerza.</p>
+          <p class="score-line" data-challenges-summary aria-live="polite"></p>
+          <div data-challenges-panel>
+            <p>Evaluando desafíos…</p>
+          </div>
+        </section>
+
         <p class="cluster section-actions">
+          <a class="btn btn--primary" href="./resultado.html">Ver resultado</a>
           <a class="btn btn--ghost" href="./escenarios.html">Ver escenarios</a>
           <a class="btn btn--ghost" href="./desafios.html">Ver desafíos</a>
         </p>

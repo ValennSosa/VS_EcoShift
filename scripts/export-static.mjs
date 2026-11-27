@@ -11,6 +11,8 @@ const files = [
   "escenarios.html",
   "desafios.html",
   "resultado.html",
+  "robots.txt",
+  "sitemap.xml",
 ];
 
 for (const file of files) {
@@ -23,6 +25,10 @@ cpSync("data", join(out, "data"), { recursive: true });
 
 if (existsSync("assets")) {
   cpSync("assets", join(out, "assets"), { recursive: true });
+}
+
+if (!existsSync(join(out, "assets/brand/og-cover.png"))) {
+  console.warn("Aviso: falta assets/brand/og-cover.png en el export.");
 }
 
 cpSync("node_modules/bootstrap/dist", join(out, "node_modules/bootstrap/dist"), {
