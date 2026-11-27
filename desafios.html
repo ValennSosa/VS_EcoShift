@@ -5,11 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Desafíos — VS EcoShift</title>
   <meta name="description" content="Metas educativas de VS EcoShift: emisiones, energía renovable, superficie verde y movilidad sostenible.">
+  <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#0c342b">
-  <meta property="og:title" content="Desafíos — VS EcoShift">
-  <meta property="og:description" content="Cuatro condiciones de cumplimiento definidas contra Ciudad actual.">
+  <link rel="canonical" href="https://vs-ecoshift.vercel.app/desafios.html">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_AR">
+  <meta property="og:site_name" content="VS EcoShift">
+  <meta property="og:title" content="Desafíos — VS EcoShift">
+  <meta property="og:description" content="Cuatro metas educativas contra Ciudad actual: emisiones, energía renovable, superficie verde y movilidad.">
+  <meta property="og:url" content="https://vs-ecoshift.vercel.app/desafios.html">
+  <meta property="og:image" content="https://vs-ecoshift.vercel.app/assets/brand/og-cover.png">
+  <meta property="og:image:width" content="1424">
+  <meta property="og:image:height" content="752">
+  <meta property="og:image:alt" content="VS EcoShift: portada del simulador educativo de sostenibilidad urbana">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Desafíos — VS EcoShift">
+  <meta name="twitter:description" content="Cuatro metas educativas contra Ciudad actual: emisiones, energía renovable, superficie verde y movilidad.">
+  <meta name="twitter:image" content="https://vs-ecoshift.vercel.app/assets/brand/og-cover.png">
+  <meta name="twitter:image:alt" content="VS EcoShift: portada del simulador educativo de sostenibilidad urbana">
   <link rel="icon" href="./assets/brand/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,51 +37,22 @@
     <header class="page-intro">
       <div class="container">
         <p class="eyebrow">Desafíos</p>
-        <h1 class="page-intro__title">Metas claras, sin progreso inventado</h1>
-        <p class="lead">Las condiciones ya están definidas. El cumplimiento se va a evaluar con los valores completos del motor, no con el redondeo de la pantalla. El progreso todavía no se calcula.</p>
+        <h1 class="page-intro__title">Metas claras, con evaluación real</h1>
+        <p class="lead">Cuatro condiciones educativas contra Ciudad actual. El cumplimiento usa los valores completos del motor, no el redondeo de la pantalla.</p>
         <p class="disclaimer">Simulación educativa. Estos valores no son mediciones ambientales reales.</p>
       </div>
     </header>
     <section class="section section--tight" aria-labelledby="metas-titulo">
       <div class="container">
-        <h2 id="metas-titulo" class="u-visually-hidden">Condiciones</h2>
-        <div class="challenge-list">
-          <article class="challenge" id="emisiones">
-            <p class="challenge__index">Meta 01</p>
-            <h3>Reducir emisiones un 20%</h3>
-            <dl class="definition">
-              <dt>Condición</dt>
-              <dd>La reducción se calcula contra el valor inicial completo de Ciudad actual: la baja tiene que ser de al menos el 20% de esa cifra.</dd>
-            </dl>
-          </article>
-          <article class="challenge" id="renovable">
-            <p class="challenge__index">Meta 02</p>
-            <h3>Alcanzar 40 de energía renovable</h3>
-            <dl class="definition">
-              <dt>Condición</dt>
-              <dd>El indicador completo tiene que ser mayor o igual a 40. Un 39,96 mostrado como 40,0 no alcanza.</dd>
-            </dl>
-          </article>
-          <article class="challenge" id="superficie">
-            <p class="challenge__index">Meta 03</p>
-            <h3>Sumar 15 puntos de superficie verde</h3>
-            <dl class="definition">
-              <dt>Condición</dt>
-              <dd>Hacen falta 15 puntos del indicador respecto de Ciudad actual. No se trata de un 15% relativo.</dd>
-            </dl>
-          </article>
-          <article class="challenge" id="movilidad">
-            <p class="challenge__index">Meta 04</p>
-            <h3>Llegar a 55 de movilidad sostenible</h3>
-            <dl class="definition">
-              <dt>Condición</dt>
-              <dd>El indicador completo de movilidad tiene que ser mayor o igual a 55.</dd>
-            </dl>
-          </article>
+        <h2 id="metas-titulo">Estado de las metas</h2>
+        <p class="status-note" data-challenges-context></p>
+        <p class="score-line" data-challenges-summary aria-live="polite"></p>
+        <div data-challenges>
+          <p>Evaluando desafíos…</p>
         </div>
         <p class="cluster section-actions">
           <a class="btn btn--primary" href="./simulador.html">Transformá tu ciudad</a>
-          <a class="btn btn--ghost" href="./resultado.html">Cómo se va a leer el resultado</a>
+          <a class="btn btn--ghost" href="./resultado.html">Ver resultado</a>
         </p>
       </div>
     </section>

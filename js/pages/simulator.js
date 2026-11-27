@@ -1,4 +1,5 @@
 import { VARIABLE_KEYS, simulate } from "../sim/engine.js";
+import { evaluateFromResults } from "../sim/challenges.js";
 import {
   MAX_CUSTOM_SCENARIOS,
   loadPresetIntoDraft,
@@ -20,6 +21,7 @@ import {
 import { isWriteBlocked } from "../state/persistence.js";
 
 import { initCharts, updateCharts } from "../ui/charts.js";
+import { renderChallenges, summarizeChallengeStatus } from "../ui/challenges.js";
 import { initCity, updateCity } from "../ui/city.js";
 import { renderControls, syncControls } from "../ui/controls.js";
 import { renderIndicators, updateIndicators, updateSummary } from "../ui/indicators.js";
@@ -39,6 +41,8 @@ export async function initSimulator() {
   const compareAlt = document.querySelector("[data-chart-compare-alt]");
   const draftPanel = document.querySelector("[data-draft-panel]");
   const storageStatus = document.querySelector("[data-storage-status]");
+  const challengesPanel = document.querySelector("[data-challenges-panel]");
+  const challengesSummary = document.querySelector("[data-challenges-summary]");
   if (!bar || !controls || !indicators || !score || !summary || !zoneLive || !stage || !zonePanel) return;
 
   try {
@@ -75,6 +79,7 @@ export async function initSimulator() {
       updateCity(result.variables);
       markSelectedPreset(bar, presets, result.variables);
       if (draftPanel) renderDraftPanel(draftPanel, () => afterDraftAction());
+      paintChallenges(result, baselineResult, challengesPanel, challengesSummary);
       if (announce) updateSummary(summary, result, baselineResult);
       if (persist) {
         const saved = persistDraftOnly();
@@ -291,6 +296,13 @@ function markSelectedPreset(container, presets, variables) {
     const byValues = VARIABLE_KEYS.every((key) => variables[key] === preset.variables[key]);
     button.setAttribute("aria-pressed", String(byOrigin || (meta.origin === ORIGIN.NEW && byValues && preset.id === "ciudad-actual")));
   }
+}
+
+function paintChallenges(result, baselineResult, panel, summaryNode) {
+  if (!panel) return;
+  const evaluations = evaluateFromResults(result, baselineResult);
+  if (summaryNode) summaryNode.textContent = summarizeChallengeStatus(evaluations);
+  renderChallenges(panel, evaluations, { compact: true, headingId: "desafios-sim-titulo" });
 }
 
 function message(text) {

@@ -4,18 +4,40 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Resultado — VS EcoShift</title>
-  <meta name="description" content="Pantalla de resultado de VS EcoShift. La comparación y la valoración educativa se van a calcular con el motor.">
+  <meta name="description" content="Resultado educativo de VS EcoShift: valoración, indicadores, desafíos y comparación con Ciudad actual.">
+  <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#0c342b">
-  <meta property="og:title" content="Resultado — VS EcoShift">
-  <meta property="og:description" content="Comparación, consecuencias y valoración educativa de la ciudad ficticia.">
+  <link rel="canonical" href="https://vs-ecoshift.vercel.app/resultado.html">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_AR">
+  <meta property="og:site_name" content="VS EcoShift">
+  <meta property="og:title" content="Resultado — VS EcoShift">
+  <meta property="og:description" content="Valoración educativa, indicadores, desafíos y comparación con Ciudad actual en la ciudad ficticia.">
+  <meta property="og:url" content="https://vs-ecoshift.vercel.app/resultado.html">
+  <meta property="og:image" content="https://vs-ecoshift.vercel.app/assets/brand/og-cover.png">
+  <meta property="og:image:width" content="1424">
+  <meta property="og:image:height" content="752">
+  <meta property="og:image:alt" content="VS EcoShift: portada del simulador educativo de sostenibilidad urbana">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Resultado — VS EcoShift">
+  <meta name="twitter:description" content="Valoración educativa, indicadores, desafíos y comparación con Ciudad actual en la ciudad ficticia.">
+  <meta name="twitter:image" content="https://vs-ecoshift.vercel.app/assets/brand/og-cover.png">
+  <meta name="twitter:image:alt" content="VS EcoShift: portada del simulador educativo de sostenibilidad urbana">
   <link rel="icon" href="./assets/brand/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="./styles/style.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "chart.js": "./node_modules/chart.js/dist/chart.js",
+      "chart.js/auto": "./node_modules/chart.js/auto/auto.js",
+      "@kurkle/color": "./node_modules/@kurkle/color/dist/color.esm.js"
+    }
+  }
+  </script>
 </head>
 <body class="page" data-page="result">
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -25,47 +47,72 @@
       <div class="container">
         <p class="eyebrow">Resultado</p>
         <h1 class="page-intro__title">La lectura de una decisión</h1>
-        <p class="lead">Esta pantalla va a comparar el punto de partida con el escenario en edición, separar mejoras y retrocesos, y cerrar con una valoración educativa. Todavía no hay cifras porque el motor no está activo.</p>
+        <p class="lead">Valoración educativa, indicadores, desafíos y comparación contra Ciudad actual. Esta pantalla es de consulta: no modifica el borrador ni los escenarios guardados.</p>
         <p class="disclaimer">Simulación educativa. Estos valores no son mediciones ambientales reales.</p>
       </div>
     </header>
-    <section class="section section--tight" aria-labelledby="comparacion-titulo">
-      <div class="container">
-        <h2 id="comparacion-titulo">Comparación</h2>
-        <div class="compare-scaffold">
-          <article class="compare-card">
-            <h3>Ciudad actual</h3>
-            <p>Referencia fija. Sus lecturas las va a calcular el motor y van a servir de punto inicial.</p>
-          </article>
-          <article class="compare-card">
-            <h3>Escenario en edición</h3>
-            <p>Va a mostrar el borrador activo. La diferencia se va a calcular con los valores completos.</p>
-          </article>
+
+    <section class="section section--tight" data-result-error hidden></section>
+
+    <div data-result-content>
+      <section class="section section--tight" aria-labelledby="contexto-titulo">
+        <div class="container">
+          <h2 id="contexto-titulo" class="u-visually-hidden">Contexto</h2>
+          <p class="status-note" data-result-context></p>
+          <p class="result-score-block">
+            <span class="result-score-block__label">Valoración educativa</span>
+            <span class="result-score-block__value" data-result-score>—</span>
+            <span class="result-score-block__scale">Escala de 0 a 100</span>
+          </p>
+          <p data-result-interpretation></p>
         </div>
-      </div>
-    </section>
-    <section class="section section--tight" aria-labelledby="consecuencias-titulo">
-      <div class="container split">
-        <section class="panel">
-          <h2 id="consecuencias-titulo">Consecuencias</h2>
-          <p>Acá se van a listar las lecturas que mejoran y las que retroceden. Un avance general puede incluir un efecto desfavorable.</p>
-          <p class="disclaimer">Sin consecuencias calculadas en esta etapa.</p>
-        </section>
-        <section class="panel" aria-labelledby="valoracion-titulo">
-          <h2 id="valoracion-titulo">Valoración educativa</h2>
-          <p>Va a resumir las siete lecturas en una escala de 0 a 100. La cifra va a salir de las fórmulas, no de una estimación visual.</p>
-          <div class="chart-slot">
-            <p>Espacio reservado para el gráfico comparativo. El gráfico se va a dibujar cuando existan valores calculados.</p>
+      </section>
+
+      <section class="section section--tight" aria-labelledby="indicadores-resultado-titulo">
+        <div class="container panel">
+          <p class="panel__label">Lecturas</p>
+          <h2 id="indicadores-resultado-titulo">Siete indicadores</h2>
+          <p>La diferencia se calcula contra Ciudad actual con los valores completos. En pantalla ves un decimal.</p>
+          <p class="score-line" data-score></p>
+          <ul class="quiet-list" data-indicators></ul>
+        </div>
+      </section>
+
+      <section class="section section--tight" aria-labelledby="desafios-resultado-titulo">
+        <div class="container">
+          <h2 id="desafios-resultado-titulo">Desafíos</h2>
+          <p class="score-line" data-challenges-summary aria-live="polite"></p>
+          <div data-challenges>
+            <p>Evaluando desafíos…</p>
           </div>
-        </section>
-      </div>
-      <div class="container">
-        <p class="cluster section-actions">
-          <a class="btn btn--primary" href="./simulador.html">Volver al simulador</a>
-          <a class="btn btn--ghost" href="./escenarios.html">Revisar escenarios</a>
-        </p>
-      </div>
-    </section>
+        </div>
+      </section>
+
+      <section class="section section--tight" aria-labelledby="comparacion-resultado-titulo">
+        <div class="container">
+          <h2 id="comparacion-resultado-titulo">Comparación con Ciudad actual</h2>
+          <p data-compare-narrative></p>
+          <figure class="chart-panel">
+            <figcaption id="comparacion-chart-titulo">Gráfico comparativo</figcaption>
+            <p class="chart-panel__note">Barras agrupadas: Ciudad actual frente a la configuración consultada.</p>
+            <div class="chart-frame chart-frame--tall">
+              <canvas id="chart-compare-result" data-chart-compare aria-labelledby="comparacion-chart-titulo" role="img"></canvas>
+            </div>
+            <p class="chart-compare-text" data-chart-compare-alt></p>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section section--tight">
+        <div class="container">
+          <p class="cluster section-actions">
+            <a class="btn btn--primary" href="./simulador.html">Seguir editando la ciudad</a>
+            <a class="btn btn--ghost" href="./escenarios.html">Consultar escenarios</a>
+            <a class="btn btn--ghost" href="./desafios.html">Ver desafíos</a>
+          </p>
+        </div>
+      </section>
+    </div>
   </main>
   <footer class="site-footer" data-app-footer></footer>
   <script type="module" src="./js/main.js"></script>

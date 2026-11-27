@@ -23,8 +23,9 @@ let profileAlt = null;
 let compareAlt = null;
 let reducedMotion = false;
 
-export function initCharts({ profileCanvas, compareCanvas, profileText, compareText }) {
-  if (!profileCanvas || !compareCanvas) return null;
+export function initCharts({ profileCanvas, compareCanvas, profileText, compareText, currentLabel = "Simulación actual" }) {
+  // Perfil opcional: la página de resultado puede montar solo la comparación.
+  if (!compareCanvas && !profileCanvas) return null;
 
   profileAlt = profileText || null;
   compareAlt = compareText || null;
@@ -33,71 +34,82 @@ export function initCharts({ profileCanvas, compareCanvas, profileText, compareT
   const labels = READINGS.map((reading) => reading.label);
   const animation = reducedMotion ? false : { duration: 280 };
 
-  profileChart = new Chart(profileCanvas.getContext("2d"), {
-    type: "bar",
-    data: {
-      labels,
-      datasets: [
-        {
-          label: "Simulación actual",
-          data: READINGS.map(() => 0),
-          backgroundColor: COLORS.current,
-          borderColor: COLORS.emeraldDeep,
-          borderWidth: 1,
-          borderRadius: 6,
-          barPercentage: 0.72,
-        },
-      ],
-    },
-    options: horizontalOptions("Perfil de indicadores de la simulación actual", animation),
-  });
+  profileChart = null;
+  compareChart = null;
 
-  compareChart = new Chart(compareCanvas.getContext("2d"), {
-    type: "bar",
-    data: {
-      labels,
-      datasets: [
-        {
-          label: "Ciudad actual",
-          data: READINGS.map(() => 0),
-          backgroundColor: COLORS.baseline,
-          borderColor: COLORS.mineral,
-          borderWidth: 1,
-          borderRadius: 6,
-          barPercentage: 0.85,
-          categoryPercentage: 0.7,
-        },
-        {
-          label: "Simulación actual",
-          data: READINGS.map(() => 0),
-          backgroundColor: COLORS.current,
-          borderColor: COLORS.emeraldDeep,
-          borderWidth: 1,
-          borderRadius: 6,
-          barPercentage: 0.85,
-          categoryPercentage: 0.7,
-        },
-      ],
-    },
-    options: horizontalOptions("Comparación entre Ciudad actual y la simulación", animation, true),
-  });
+  if (profileCanvas) {
+    profileChart = new Chart(profileCanvas.getContext("2d"), {
+      type: "bar",
+      data: {
+        labels,
+        datasets: [
+          {
+            label: currentLabel,
+            data: READINGS.map(() => 0),
+            backgroundColor: COLORS.current,
+            borderColor: COLORS.emeraldDeep,
+            borderWidth: 1,
+            borderRadius: 6,
+            barPercentage: 0.72,
+          },
+        ],
+      },
+      options: horizontalOptions("Perfil de indicadores de la simulación actual", animation),
+    });
+  }
+
+  if (compareCanvas) {
+    compareChart = new Chart(compareCanvas.getContext("2d"), {
+      type: "bar",
+      data: {
+        labels,
+        datasets: [
+          {
+            label: "Ciudad actual",
+            data: READINGS.map(() => 0),
+            backgroundColor: COLORS.baseline,
+            borderColor: COLORS.mineral,
+            borderWidth: 1,
+            borderRadius: 6,
+            barPercentage: 0.85,
+            categoryPercentage: 0.7,
+          },
+          {
+            label: currentLabel,
+            data: READINGS.map(() => 0),
+            backgroundColor: COLORS.current,
+            borderColor: COLORS.emeraldDeep,
+            borderWidth: 1,
+            borderRadius: 6,
+            barPercentage: 0.85,
+            categoryPercentage: 0.7,
+          },
+        ],
+      },
+      options: horizontalOptions("Comparación entre Ciudad actual y la simulación", animation, true),
+    });
+  }
 
   return { updateCharts };
 }
 
 export function updateCharts(result, baseline) {
-  if (!profileChart || !compareChart || !result?.indicators || !baseline?.indicators) return;
+  if ((!profileChart && !compareChart) || !result?.indicators || !baseline?.indicators) return;
 
   const rows = buildComparisonRows(result, baseline);
   const profileValues = rows.map((row) => Number(row.current.toFixed(1)));
   const baselineValues = rows.map((row) => Number(row.baseline.toFixed(1)));
 
-  profileChart.data.datasets[0].data = profileValues;
-  compareChart.data.datasets[0].data = baselineValues;
-  compareChart.data.datasets[1].data = profileValues;
+  if (profileChart) {
+    profileChart.data.datasets[0].data = profileValues;
+    profileChart.update(reducedMotion ? "none" : undefined);
+  }
 
-  profileChart.update(reducedMotion ? "none" : undefined);
-  compareChart.update(reducedMotion ? "none" : undefined);
+  if (compareChart) {
+    compareChart.data.datasets[0].data = baselineValues;
+    compareChart.data.datasets[1].data = profileValues;
+    compareChart.update(reducedMotion ? "none" : undefined);
+  }
 
   paintAlternatives(rows, result.score);
 }

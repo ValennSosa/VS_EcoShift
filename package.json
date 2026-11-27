@@ -4,6 +4,9 @@
   "private": true,
   "description": "VS EcoShift: simulador educativo de sostenibilidad urbana.",
   "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "sass": "sass scss/main.scss styles/style.css --style=expanded --watch",
     "sass:build": "sass scss/main.scss styles/style.css --style=compressed",

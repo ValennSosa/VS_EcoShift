@@ -16,6 +16,16 @@ if (pageId === "scenarios") {
   await initScenariosPage();
 }
 
+if (pageId === "challenges") {
+  const { initChallengesPage } = await import("./pages/challenges.js");
+  await initChallengesPage();
+}
+
+if (pageId === "result") {
+  const { initResultPage } = await import("./pages/result.js");
+  await initResultPage();
+}
+
 const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 function startMotion() {
