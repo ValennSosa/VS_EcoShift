@@ -1,9 +1,9 @@
 import * as THREE from "three";
 
-/** Encuadre para la ciudad procedural (~24u de plataforma). */
-export const ISO_OFFSET = new THREE.Vector3(20, 18, 20);
-export const FRUSTUM_SIZE = 22;
-export const DEFAULT_TARGET = new THREE.Vector3(0, 0.6, 0.4);
+/** Encuadre para la trama urbana R1 (~28u de plataforma). */
+export const ISO_OFFSET = new THREE.Vector3(24, 20, 24);
+export const FRUSTUM_SIZE = 26;
+export const DEFAULT_TARGET = new THREE.Vector3(0, 0.5, 0.2);
 
 export function createOrthoCamera() {
   const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 250);

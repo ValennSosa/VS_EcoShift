@@ -13,6 +13,7 @@ test("el layout cubre las seis zonas del motor", () => {
     assert.equal(ZONE_LAYOUT[zone.id].id, zone.id);
   }
   assert.ok(layout.roads.length >= 4);
+  assert.ok(layout.blocks?.length === 9);
 });
 
 test("el PRNG es determinista con la misma semilla", () => {
