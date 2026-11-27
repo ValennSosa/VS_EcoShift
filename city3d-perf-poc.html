@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Benchmark rendimiento 3D — VS EcoShift</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0c342b">
+  <link rel="icon" href="./assets/brand/favicon.svg" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles/style.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./node_modules/three/build/three.module.js",
+      "three/addons/": "./node_modules/three/examples/jsm/"
+    }
+  }
+  </script>
+  <style>
+    .poc-page {
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse at 18% 0%, rgba(31, 170, 110, 0.16), transparent 52%),
+        linear-gradient(160deg, #0c342b 0%, #10241c 55%, #0a221c 100%);
+      color: #f8fbf6;
+    }
+    .poc-wrap {
+      width: min(1140px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 1.5rem 0 2.5rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+    .poc-wrap h1 {
+      margin: 0;
+      font-family: Sora, sans-serif;
+      font-size: clamp(1.35rem, 2vw, 1.85rem);
+    }
+    .poc-wrap p { margin: 0; max-width: 70ch; color: rgba(248, 251, 246, 0.82); }
+    .poc-meta { display: flex; flex-wrap: wrap; gap: 0.75rem 1.25rem; font-size: 0.92rem; }
+    .poc-stage {
+      height: min(56vh, 560px);
+      border: 1px solid rgba(248, 251, 246, 0.16);
+      border-radius: 0.75rem;
+      overflow: hidden;
+      background: #0c342b;
+    }
+    .city3d-poc-host, .city3d-poc-canvas { width: 100%; height: 100%; display: block; }
+    .poc-actions { display: flex; flex-wrap: wrap; gap: 0.65rem; }
+    .poc-actions a, .poc-actions button {
+      min-height: 2.4rem;
+      padding: 0.35rem 0.85rem;
+      border: 1px solid rgba(248, 251, 246, 0.28);
+      border-radius: 0.45rem;
+      background: transparent;
+      color: #f8fbf6;
+      font-family: Sora, sans-serif;
+      font-size: 0.84rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+    }
+    .poc-out {
+      margin: 0;
+      padding: 1rem;
+      border-radius: 0.65rem;
+      background: rgba(0,0,0,0.28);
+      border: 1px solid rgba(248,251,246,0.12);
+      overflow: auto;
+      max-height: 42vh;
+      font-size: 0.78rem;
+      line-height: 1.45;
+      white-space: pre-wrap;
+    }
+    .poc-note { font-size: 0.88rem; color: rgba(248, 251, 246, 0.7); }
+    .poc-note a { color: #c6ef4a; }
+  </style>
+</head>
+<body class="poc-page">
+  <main class="poc-wrap">
+    <p style="margin:0;color:#c6ef4a;font-family:Sora,sans-serif;font-weight:600;letter-spacing:.04em;text-transform:uppercase;font-size:.75rem;">R3.1 · Rendimiento</p>
+    <h1>Benchmark — ciudad completa</h1>
+    <p>
+      Medición reproducible de FPS, draw calls y geometría. Parámetros:
+      <code>?profile=desktop|mobile</code>,
+      <code>&amp;mode=optimized|baseline</code>,
+      <code>&amp;layer=full|r1|r2|r3|r1r2</code>.
+    </p>
+    <div class="poc-meta" aria-live="polite">
+      <span data-city3d-perf-status>Preparando…</span>
+    </div>
+    <div class="poc-actions">
+      <button type="button" data-cam="elevated">Elevada</button>
+      <button type="button" data-cam="oblique">Oblicua</button>
+      <button type="button" data-cam="street">Calle</button>
+      <a href="?profile=desktop&amp;mode=baseline&amp;layer=full">Baseline desktop</a>
+      <a href="?profile=desktop&amp;mode=optimized&amp;layer=full">Optimizado desktop</a>
+      <a href="?profile=mobile&amp;mode=optimized&amp;layer=full">Optimizado móvil</a>
+    </div>
+    <div class="poc-stage" data-city3d-perf-poc></div>
+    <pre class="poc-out" data-city3d-perf-out>Esperando resultados…</pre>
+    <p class="poc-note">
+      <a href="./city3d-landscape-poc.html">PoC paisaje</a>
+      · <a href="./simulador.html?city=3d">Simulador 3D</a>
+    </p>
+  </main>
+  <script type="module" src="./js/city3d/mount-perf-poc.js"></script>
+</body>
+</html>
