@@ -63,7 +63,7 @@
   align-items: baseline;
   justify-content: space-between;
   gap: $space-2;
-  margin-bottom: $space-3;
+  margin-bottom: $space-2;
 }
 
 .scenarios-count {
@@ -74,16 +74,34 @@
   font-weight: 600;
 }
 
+.compare-cue {
+  margin: 0 0 $space-3;
+  padding: $space-2 $space-3;
+  border: 1px solid $color-line;
+  border-radius: $radius-sm;
+  background: rgba(14, 122, 88, 0.06);
+  color: $color-mineral;
+  font-size: 0.98rem;
+}
+
+.compare-cue a {
+  color: $color-emerald-deep;
+  font-family: $font-display;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
 .scenario-list {
   display: grid;
-  gap: $space-3;
+  gap: $space-2;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .scenario-card {
-  padding: $space-4;
+  padding: $space-3;
   background: $color-white;
   border: 1px solid $color-line;
   border-radius: $radius;
@@ -92,8 +110,8 @@
 
 .scenario-card__top {
   display: grid;
-  gap: 0.25rem;
-  margin-bottom: $space-2;
+  gap: 0.15rem;
+  margin-bottom: $space-1;
 }
 
 .scenario-card__top h3 {
@@ -107,21 +125,30 @@
 }
 
 .scenario-card__actions {
-  margin-top: $space-3;
+  margin-top: $space-2;
 }
 
 .scenario-compare-pick {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.45rem;
+  min-height: 2.75rem;
+  padding: 0.2rem 0.15rem;
   color: $color-ink;
   font-family: $font-display;
   font-size: 0.95rem;
   font-weight: 600;
 }
 
+.scenario-compare-pick input {
+  width: 1.15rem;
+  height: 1.15rem;
+  accent-color: $color-emerald;
+}
+
 .compare-panel {
   margin-top: 0;
+  scroll-margin-top: 5.5rem;
 }
 
 .compare-summary {
@@ -160,5 +187,14 @@
 
   .scenario-list {
     grid-template-columns: 1fr 1fr;
+    gap: $space-3;
+  }
+
+  .scenario-card {
+    padding: $space-4;
+  }
+
+  .scenario-card__actions {
+    margin-top: $space-3;
   }
 }

@@ -112,8 +112,15 @@ function renderCustom(root, compareRoot) {
     root.append(empty);
     compareRoot.replaceChildren();
     compareRoot.hidden = true;
+    compareRoot.dataset.ready = "false";
     return;
   }
+
+  const cue = document.createElement("p");
+  cue.className = "compare-cue";
+  cue.innerHTML =
+    `Marcá hasta dos escenarios y usá <a href="#comparar-propios-titulo">Comparar selección</a> para ver el contraste educativo.`;
+  root.append(cue);
 
   const list = document.createElement("ul");
   list.className = "scenario-list";
@@ -191,7 +198,12 @@ function renderCustom(root, compareRoot) {
       renderCustom(root, compareRoot);
     });
 
-    actions.append(loadBtn, renameBtn, deleteBtn, comparePick);
+    const resultLink = document.createElement("a");
+    resultLink.className = "btn btn--ghost";
+    resultLink.href = `./resultado.html?scenario=${encodeURIComponent(scenario.id)}`;
+    resultLink.textContent = "Ver resultado";
+
+    actions.append(comparePick, loadBtn, resultLink, renameBtn, deleteBtn);
     item.append(top, scoreLine, actions);
     list.append(item);
   }

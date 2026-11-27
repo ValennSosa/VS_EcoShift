@@ -1,4 +1,5 @@
 @use "variables" as *;
+@use "mixins" as *;
 
 h1,
 h2,
@@ -6,7 +7,7 @@ h3,
 .brand,
 .site-footer__brand {
   font-family: $font-display;
-  line-height: 1.08;
+  line-height: 1.18;
   letter-spacing: -0.04em;
 }
 
@@ -33,6 +34,7 @@ h3 {
   margin-bottom: $space-2;
   font-size: 1.25rem;
   letter-spacing: -0.03em;
+  line-height: 1.22;
 }
 
 .eyebrow {
@@ -53,4 +55,22 @@ h3 {
 .section-copy {
   max-width: $max-read;
   color: $color-mineral;
+}
+
+@include respond-up($bp-md) {
+  h1,
+  h2,
+  .brand,
+  .site-footer__brand {
+    line-height: 1.12;
+  }
+}
+
+@include respond-up($bp-lg) {
+  h1,
+  h2,
+  .brand,
+  .site-footer__brand {
+    line-height: 1.08;
+  }
 }

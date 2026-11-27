@@ -33,6 +33,7 @@ export function renderHeader(pageId) {
 
   function setOpen(open, restoreFocus) {
     button.setAttribute("aria-expanded", String(open));
+    button.textContent = open ? "Cerrar" : "Menú";
     panel.classList.toggle("is-open", open);
     if (open) {
       panel.querySelector("a")?.focus();
@@ -46,6 +47,10 @@ export function renderHeader(pageId) {
   button.addEventListener("click", () => {
     if (!compactNav.matches) return;
     setOpen(button.getAttribute("aria-expanded") !== "true", false);
+  });
+
+  compactNav.addEventListener("change", () => {
+    if (!compactNav.matches) setOpen(false, false);
   });
 
   header.addEventListener("keydown", (event) => {

@@ -1,3 +1,4 @@
+import { VARIABLE_KEYS } from "../sim/engine.js";
 import { ZONE_DEFINITIONS, calculateZoneStates, getZoneState } from "../sim/zones.js";
 
 const LEVEL_LABELS = {
@@ -6,16 +7,6 @@ const LEVEL_LABELS = {
   high: "Alto",
 };
 
-const VARIABLE_KEYS = [
-  "greenSpaces",
-  "electricTransport",
-  "solarEnergy",
-  "energyEfficiency",
-  "wasteManagement",
-  "bicycleUse",
-  "recycling",
-];
-
 let root = null;
 let panel = null;
 let live = null;
@@ -23,6 +14,10 @@ let chipBox = null;
 let selectedId = null;
 let latestStates = null;
 let onSelectCallback = null;
+let labelResizeObserver = null;
+
+const CITY_VIEWBOX_WIDTH = 920;
+const LABEL_SCREEN_PX = 14;
 
 export async function initCity({ stage, panel: panelNode, liveRegion, onSelect }) {
   if (!stage || !panelNode) return null;
@@ -79,6 +74,14 @@ export async function initCity({ stage, panel: panelNode, liveRegion, onSelect }
     "Elegí una zona en el mapa o en la lista. La selección no modifica los controles ni el resultado del motor.";
 
   stage.append(frame, chipBox, caption);
+  syncZoneLabelSizes();
+  if (typeof ResizeObserver === "function") {
+    labelResizeObserver?.disconnect();
+    labelResizeObserver = new ResizeObserver(() => syncZoneLabelSizes());
+    labelResizeObserver.observe(svg);
+  } else {
+    window.addEventListener("resize", syncZoneLabelSizes);
+  }
   renderPanel(null);
   return { selectZone, updateCity, getSelectedId: () => selectedId };
 }
@@ -160,6 +163,19 @@ function renderPanel(zone) {
     <h3 class="zone-subtitle">Cómo la afectan las decisiones</h3>
     <p>${escapeHtml(zone.effect)}</p>
   `;
+}
+
+function syncZoneLabelSizes() {
+  if (!root) return;
+  const width = root.getBoundingClientRect().width;
+  if (!width) return;
+  const scale = width / CITY_VIEWBOX_WIDTH;
+  const fontSize = Math.max(18, Math.min(34, LABEL_SCREEN_PX / scale));
+  const strokeWidth = Math.max(3, Math.min(7, 5 * (28 / fontSize)));
+  for (const label of root.querySelectorAll(".zone-label")) {
+    label.setAttribute("font-size", fontSize.toFixed(2));
+    label.setAttribute("stroke-width", strokeWidth.toFixed(2));
+  }
 }
 
 function toKebab(value) {
