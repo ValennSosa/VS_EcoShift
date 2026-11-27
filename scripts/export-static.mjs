@@ -1,4 +1,4 @@
-import { cpSync, mkdirSync, rmSync, existsSync } from "node:fs";
+import { cpSync, mkdirSync, rmSync, existsSync, statSync } from "node:fs";
 import { join } from "node:path";
 
 const out = ".vercel-out";
@@ -47,9 +47,34 @@ cpSync(
   "node_modules/chart.js/auto/auto.js",
   join(out, "node_modules/chart.js/auto/auto.js")
 );
+// Chart.js ESM importa ./chunks/helpers.dataset.js desde dist/chart.js.
+cpSync("node_modules/chart.js/dist/chunks", join(out, "node_modules/chart.js/dist/chunks"), {
+  recursive: true,
+});
 cpSync(
   "node_modules/@kurkle/color/dist/color.esm.js",
   join(out, "node_modules/@kurkle/color/dist/color.esm.js")
 );
+
+const requiredOutFiles = [
+  "node_modules/chart.js/dist/chart.js",
+  "node_modules/chart.js/auto/auto.js",
+  "node_modules/chart.js/dist/chunks/helpers.dataset.js",
+  "node_modules/@kurkle/color/dist/color.esm.js",
+];
+
+const missing = [];
+for (const rel of requiredOutFiles) {
+  const full = join(out, rel);
+  if (!existsSync(full) || !statSync(full).isFile() || statSync(full).size < 1) {
+    missing.push(rel);
+  }
+}
+
+if (missing.length) {
+  console.error("Export incompleto. Faltan dependencias requeridas en .vercel-out:");
+  for (const rel of missing) console.error(`  - ${rel}`);
+  process.exit(1);
+}
 
 console.log(`Export estático listo en ${out}`);
