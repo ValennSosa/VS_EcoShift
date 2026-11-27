@@ -85,13 +85,20 @@ export function renderIndicators(container) {
 }
 
 export function updateIndicators(container, scoreNode, result, baseline) {
+  if (!container || !result?.indicators || !baseline?.indicators) return;
+
   for (const reading of READINGS) {
     const item = container.querySelector(`[data-indicator="${reading.key}"]`);
+    if (!item) continue;
+    const valueNode = item.querySelector(".reading-row__value");
+    const changeNode = item.querySelector(".reading-change");
+    if (!valueNode || !changeNode) continue;
     const change = describeChange(result.indicators[reading.key], baseline.indicators[reading.key], reading.direction);
-    item.querySelector(".reading-row__value").textContent = numberFormat.format(result.indicators[reading.key]);
-    paintChange(item.querySelector(".reading-change"), change);
+    valueNode.textContent = numberFormat.format(result.indicators[reading.key]);
+    paintChange(changeNode, change);
   }
 
+  if (!scoreNode) return;
   const scoreChange = describeChange(result.score, baseline.score, "higher");
   scoreNode.textContent = `Valoración educativa: ${numberFormat.format(result.score)}. ${changeText(scoreChange)}`;
 }

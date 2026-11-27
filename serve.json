@@ -23,6 +23,11 @@
     "serve.json",
     "README.md",
     "Indicación_inicial.txt",
-    "prompt 1.txt"
+    "prompt 1.txt",
+    "city3d-assets-poc.html",
+    "city3d-trama-poc.html",
+    "city3d-architecture-poc.html",
+    "city3d-landscape-poc.html",
+    "city3d-perf-poc.html"
   ]
 }

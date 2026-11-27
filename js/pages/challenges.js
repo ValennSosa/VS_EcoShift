@@ -32,8 +32,25 @@ export async function initChallengesPage() {
     }
 
     renderChallenges(listRoot, evaluations, { headingId: "metas-titulo" });
+    scrollToChallengeHash();
   } catch {
     listRoot.innerHTML = `<p class="status-note">No se pudieron evaluar los desafíos. Revisá que el motor y Ciudad actual estén disponibles.</p>`;
     if (summaryRoot) summaryRoot.textContent = "";
+  }
+}
+
+function scrollToChallengeHash() {
+  const raw = window.location.hash?.replace(/^#/, "") || "";
+  if (!raw) return;
+  const target = document.getElementById(raw);
+  if (!target) return;
+  target.scrollIntoView({ block: "start", behavior: "smooth" });
+  if (typeof target.focus === "function") {
+    try {
+      target.setAttribute("tabindex", "-1");
+      target.focus({ preventScroll: true });
+    } catch {
+      /* ignore focus failures */
+    }
   }
 }

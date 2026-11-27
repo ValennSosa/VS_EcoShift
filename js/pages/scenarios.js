@@ -227,9 +227,14 @@ function ensureCompareShell(root) {
     <div data-compare-result class="compare-result" hidden></div>
   `;
 
-  root.querySelector("[data-run-compare]").addEventListener("click", () => {
+  const runCompare = root.querySelector("[data-run-compare]");
+  const clearCompare = root.querySelector("[data-clear-compare]");
+  if (!runCompare || !clearCompare) return;
+
+  runCompare.addEventListener("click", () => {
     const selected = [...root.ownerDocument.querySelectorAll('input[name="compare"]:checked')].map((input) => input.value);
     const out = root.querySelector("[data-compare-result]");
+    if (!out) return;
     if (selected.length !== 2) {
       out.hidden = false;
       out.innerHTML = `<p class="status-note">Seleccioná exactamente dos escenarios propios.</p>`;
@@ -245,11 +250,12 @@ function ensureCompareShell(root) {
     out.innerHTML = renderComparisonMarkup(comparison);
   });
 
-  root.querySelector("[data-clear-compare]").addEventListener("click", () => {
+  clearCompare.addEventListener("click", () => {
     for (const input of root.ownerDocument.querySelectorAll('input[name="compare"]')) {
       input.checked = false;
     }
     const out = root.querySelector("[data-compare-result]");
+    if (!out) return;
     out.hidden = true;
     out.replaceChildren();
     syncCompareSelection(root);

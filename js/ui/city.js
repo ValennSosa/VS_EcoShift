@@ -70,8 +70,6 @@ export async function initCity({ stage, panel: panelNode, liveRegion, onSelect, 
 
   const caption = document.createElement("p");
   caption.className = "city-stage__caption";
-  caption.textContent =
-    "Elegí una zona en la lista (o en el mapa SVG). La selección no modifica los controles ni el resultado del motor.";
 
   shell.append(toolbar, viewport, chipBox, caption);
   stage.append(shell);
@@ -80,6 +78,12 @@ export async function initCity({ stage, panel: panelNode, liveRegion, onSelect, 
   let mounted = false;
 
   if (preferred === "3d" && detectWebGL()) {
+    modeNote.textContent = "Cargando ciudad 3D…";
+    viewport.setAttribute("aria-busy", "true");
+    const loading = document.createElement("p");
+    loading.className = "city-view__loading";
+    loading.textContent = "Preparando arquitectura, vegetación y movilidad…";
+    viewport.append(loading);
     try {
       // Interruptor de prueba: localStorage vs-ecoshift:city3d-fail=1
       let forceFail = false;
@@ -98,6 +102,9 @@ export async function initCity({ stage, panel: panelNode, liveRegion, onSelect, 
     } catch (error) {
       console.warn("No se pudo iniciar la ciudad 3D; se usa el SVG.", error);
       city3d = null;
+      viewport.replaceChildren();
+    } finally {
+      viewport.removeAttribute("aria-busy");
     }
   }
 
@@ -110,6 +117,11 @@ export async function initCity({ stage, panel: panelNode, liveRegion, onSelect, 
         : "Vista SVG";
     resetBtn.hidden = true;
   }
+
+  caption.textContent =
+    viewMode === "3d"
+      ? "Elegí una zona en la lista. La selección no modifica los controles ni el resultado del motor."
+      : "Elegí una zona en la lista (o en el mapa SVG). La selección no modifica los controles ni el resultado del motor.";
 
   mountZoneChips(viewMode === "svg");
   renderPanel(null);
