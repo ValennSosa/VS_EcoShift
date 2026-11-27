@@ -11,6 +11,11 @@ if (pageId === "simulator") {
   await initSimulator();
 }
 
+if (pageId === "scenarios") {
+  const { initScenariosPage } = await import("./pages/scenarios.js");
+  await initScenariosPage();
+}
+
 const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 function startMotion() {
