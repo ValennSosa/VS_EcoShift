@@ -1,0 +1,145 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+.hero {
+  padding: $space-5 0 $space-6;
+}
+
+.hero__grid {
+  display: grid;
+  gap: $space-5;
+  align-items: center;
+}
+
+.hero__title {
+  max-width: 12ch;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  margin-top: $space-4;
+}
+
+.steps {
+  display: grid;
+  gap: $space-3;
+}
+
+.step {
+  padding: $space-4;
+  background: $color-white;
+  border-radius: $radius;
+  box-shadow: $shadow;
+}
+
+.step__index {
+  margin-bottom: $space-3;
+  color: $color-emerald;
+  font-family: $font-display;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.mosaic {
+  display: grid;
+  gap: $space-3;
+}
+
+.mosaic__lead,
+.tile {
+  padding: $space-4;
+  border-radius: $radius;
+}
+
+.mosaic__lead {
+  background: $color-emerald-deep;
+  color: $color-white;
+}
+
+.mosaic__lead p:last-child {
+  margin-bottom: 0;
+  color: rgba(248, 251, 246, 0.82);
+}
+
+.tile {
+  background: $color-white;
+  border: 1px solid $color-line;
+}
+
+.tile p:last-child {
+  margin-bottom: 0;
+  color: $color-mineral;
+}
+
+.band {
+  padding: $space-6 0;
+  background: $color-emerald-deep;
+  color: $color-white;
+}
+
+.band .eyebrow {
+  color: $color-lime;
+}
+
+.band .section-copy,
+.goal p {
+  color: rgba(248, 251, 246, 0.82);
+}
+
+.goals {
+  display: grid;
+  gap: $space-3;
+  margin-top: $space-4;
+}
+
+.goal {
+  display: block;
+  padding: $space-4;
+  border: 1px solid rgba(248, 251, 246, 0.14);
+  border-radius: $radius;
+  color: $color-white;
+  text-decoration: none;
+}
+
+.goal:hover {
+  border-color: $color-lime;
+  color: $color-white;
+}
+
+.goal span {
+  display: block;
+  margin-bottom: $space-2;
+  color: $color-lime;
+  font-family: $font-display;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+@include respond-up($bp-md) {
+  .steps,
+  .goals {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@include respond-up($bp-lg) {
+  .hero__grid {
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    gap: 4rem;
+  }
+
+  .steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .mosaic {
+    grid-template-columns: 1.2fr 1fr 1fr;
+  }
+
+  .mosaic__lead {
+    grid-row: span 2;
+  }
+}

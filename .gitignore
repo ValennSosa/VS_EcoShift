@@ -1,0 +1,7 @@
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+Indicación_inicial.txt
+prompt 1.txt
+prompt*.txt

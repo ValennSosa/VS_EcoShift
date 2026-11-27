@@ -1,0 +1,44 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+.preset-grid {
+  display: grid;
+  gap: $space-3;
+}
+
+.preset-card {
+  padding: $space-4;
+  background: $color-white;
+  border: 1px solid $color-line;
+  border-radius: $radius;
+}
+
+.preset-card--base {
+  box-shadow: inset 0 4px 0 $color-lime;
+}
+
+.preset-card p:last-child {
+  margin-bottom: 0;
+  color: $color-mineral;
+}
+
+.empty-state {
+  padding: $space-5 $space-4;
+  border: 1px dashed rgba(16, 36, 28, 0.22);
+  border-radius: $radius;
+  background: rgba(248, 251, 246, 0.65);
+}
+
+.empty-state p:last-child {
+  margin-bottom: 0;
+}
+
+.empty-state .cluster {
+  margin-top: $space-4;
+}
+
+@include respond-up($bp-md) {
+  .preset-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}

@@ -1,0 +1,47 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+.challenge-list {
+  display: grid;
+  gap: $space-3;
+}
+
+.challenge {
+  padding: $space-4;
+  background: $color-white;
+  border-radius: $radius;
+  box-shadow: $shadow;
+}
+
+.challenge__index {
+  margin-bottom: $space-2;
+  color: $color-emerald;
+  font-family: $font-display;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.compare-scaffold {
+  display: grid;
+  gap: $space-3;
+}
+
+.compare-card {
+  padding: $space-4;
+  background: $color-white;
+  border-radius: $radius;
+  border: 1px solid $color-line;
+}
+
+.compare-card p:last-child {
+  margin-bottom: 0;
+  color: $color-mineral;
+}
+
+@include respond-up($bp-md) {
+  .challenge-list,
+  .compare-scaffold {
+    grid-template-columns: 1fr 1fr;
+  }
+}

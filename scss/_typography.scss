@@ -1,0 +1,56 @@
+@use "variables" as *;
+
+h1,
+h2,
+h3,
+.brand,
+.site-footer__brand {
+  font-family: $font-display;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: $space-3;
+  font-size: clamp(2.5rem, 6vw, 4.7rem);
+  font-weight: 600;
+}
+
+h2 {
+  margin-bottom: $space-3;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 600;
+}
+
+h3 {
+  margin-bottom: $space-2;
+  font-size: 1.25rem;
+  letter-spacing: -0.03em;
+}
+
+.eyebrow {
+  margin-bottom: $space-2;
+  color: $color-emerald;
+  font-family: $font-display;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.lead {
+  max-width: $max-read;
+  font-size: 1.25rem;
+}
+
+.section-copy {
+  max-width: $max-read;
+  color: $color-mineral;
+}

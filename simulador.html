@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simulador — VS EcoShift</title>
+  <meta name="description" content="Simulador educativo de VS EcoShift. Ajustá siete decisiones y mirá cómo se recalculan las lecturas de una ciudad ficticia.">
+  <meta name="theme-color" content="#0c342b">
+  <meta property="og:title" content="Simulador — VS EcoShift">
+  <meta property="og:description" content="La ciudad, los controles y las lecturas van a compartir esta pantalla.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_AR">
+  <link rel="icon" href="./assets/brand/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./styles/style.css">
+</head>
+<body class="page" data-page="simulator">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <header class="site-header" data-app-header></header>
+  <main id="contenido" tabindex="-1">
+    <header class="page-intro">
+      <div class="container">
+        <p class="eyebrow">Simulador</p>
+        <h1 class="page-intro__title">La ciudad y sus decisiones</h1>
+        <p class="lead">Ajustá una decisión: las lecturas se recalculan y la ciudad cambia con ellas. Elegí una zona para entender qué variables la afectan. La comparación sigue siendo contra Ciudad actual.</p>
+      </div>
+    </header>
+
+    <section class="section section--tight" aria-labelledby="ciudad-titulo">
+      <div class="container">
+        <h2 id="ciudad-titulo" class="u-visually-hidden">Ciudad interactiva</h2>
+        <div class="city-layout">
+          <div class="city-stage" data-city-stage>
+            <p>Cargando la ciudad…</p>
+          </div>
+          <aside class="panel zone-panel" data-zone-panel aria-labelledby="zona-titulo">
+            <p class="panel__label">Zona</p>
+            <h2 id="zona-titulo">Explorá la ciudad</h2>
+            <p>Seleccioná una zona en el mapa para ver qué variables la afectan.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="container">
+        <p class="status-note">Simulación educativa. Estos valores no son mediciones ambientales reales. Cada control recalcula todas las lecturas y actualiza la ciudad, también cuando una decisión mejora un indicador y empeora otro.</p>
+        <div data-scenario-bar>
+          <p>Cargando escenarios de referencia…</p>
+        </div>
+        <p class="u-visually-hidden" data-live-zone aria-live="polite"></p>
+        <p class="u-visually-hidden" data-live-summary aria-live="polite"></p>
+        <div class="split">
+          <section class="panel" aria-labelledby="controles-titulo">
+            <p class="panel__label">Controles</p>
+            <h2 id="controles-titulo">Decisiones de la ciudad</h2>
+            <ul class="quiet-list" data-controls>
+              <li>Cargando los controles…</li>
+            </ul>
+          </section>
+          <section class="panel" aria-labelledby="lecturas-titulo">
+            <p class="panel__label">Lecturas</p>
+            <h2 id="lecturas-titulo">Indicadores</h2>
+            <p>La diferencia se calcula contra Ciudad actual con los valores completos. En pantalla ves un decimal.</p>
+            <p class="score-line" data-score></p>
+            <ul class="quiet-list" data-indicators></ul>
+          </section>
+        </div>
+        <p class="cluster section-actions">
+          <a class="btn btn--ghost" href="./escenarios.html">Ver escenarios</a>
+          <a class="btn btn--ghost" href="./desafios.html">Ver desafíos</a>
+        </p>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer" data-app-footer></footer>
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>

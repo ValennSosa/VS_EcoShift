@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Desafíos — VS EcoShift</title>
+  <meta name="description" content="Metas educativas de VS EcoShift: emisiones, energía renovable, superficie verde y movilidad sostenible.">
+  <meta name="theme-color" content="#0c342b">
+  <meta property="og:title" content="Desafíos — VS EcoShift">
+  <meta property="og:description" content="Cuatro condiciones de cumplimiento definidas contra Ciudad actual.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_AR">
+  <link rel="icon" href="./assets/brand/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./styles/style.css">
+</head>
+<body class="page" data-page="challenges">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <header class="site-header" data-app-header></header>
+  <main id="contenido" tabindex="-1">
+    <header class="page-intro">
+      <div class="container">
+        <p class="eyebrow">Desafíos</p>
+        <h1 class="page-intro__title">Metas claras, sin progreso inventado</h1>
+        <p class="lead">Las condiciones ya están definidas. El cumplimiento se va a evaluar con los valores completos del motor, no con el redondeo de la pantalla. El progreso todavía no se calcula.</p>
+        <p class="disclaimer">Simulación educativa. Estos valores no son mediciones ambientales reales.</p>
+      </div>
+    </header>
+    <section class="section section--tight" aria-labelledby="metas-titulo">
+      <div class="container">
+        <h2 id="metas-titulo" class="u-visually-hidden">Condiciones</h2>
+        <div class="challenge-list">
+          <article class="challenge" id="emisiones">
+            <p class="challenge__index">Meta 01</p>
+            <h3>Reducir emisiones un 20%</h3>
+            <dl class="definition">
+              <dt>Condición</dt>
+              <dd>La reducción se calcula contra el valor inicial completo de Ciudad actual: la baja tiene que ser de al menos el 20% de esa cifra.</dd>
+            </dl>
+          </article>
+          <article class="challenge" id="renovable">
+            <p class="challenge__index">Meta 02</p>
+            <h3>Alcanzar 40 de energía renovable</h3>
+            <dl class="definition">
+              <dt>Condición</dt>
+              <dd>El indicador completo tiene que ser mayor o igual a 40. Un 39,96 mostrado como 40,0 no alcanza.</dd>
+            </dl>
+          </article>
+          <article class="challenge" id="superficie">
+            <p class="challenge__index">Meta 03</p>
+            <h3>Sumar 15 puntos de superficie verde</h3>
+            <dl class="definition">
+              <dt>Condición</dt>
+              <dd>Hacen falta 15 puntos del indicador respecto de Ciudad actual. No se trata de un 15% relativo.</dd>
+            </dl>
+          </article>
+          <article class="challenge" id="movilidad">
+            <p class="challenge__index">Meta 04</p>
+            <h3>Llegar a 55 de movilidad sostenible</h3>
+            <dl class="definition">
+              <dt>Condición</dt>
+              <dd>El indicador completo de movilidad tiene que ser mayor o igual a 55.</dd>
+            </dl>
+          </article>
+        </div>
+        <p class="cluster section-actions">
+          <a class="btn btn--primary" href="./simulador.html">Transformá tu ciudad</a>
+          <a class="btn btn--ghost" href="./resultado.html">Cómo se va a leer el resultado</a>
+        </p>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer" data-app-footer></footer>
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+@use "variables" as *;
+
+.preset-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  margin: $space-2 0 $space-3;
+}
+
+.preset-option {
+  min-height: 2.5rem;
+  padding: 0.45rem 0.95rem;
+  border: 1px solid $color-line;
+  border-radius: 999px;
+  background: $color-white;
+  color: $color-ink;
+  font-family: $font-display;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.preset-option:hover {
+  border-color: $color-emerald;
+  color: $color-emerald-deep;
+}
+
+.preset-option[aria-pressed="true"] {
+  border-color: $color-emerald-deep;
+  background: $color-emerald-deep;
+  color: $color-white;
+  box-shadow: inset 0 -2px 0 $color-lime;
+}
+
+[data-scenario-bar] {
+  margin-bottom: $space-4;
+}
+
+[data-scenario-bar] .btn {
+  margin-top: $space-1;
+}
+
+.control-row {
+  padding-bottom: $space-1;
+}
+
+.control-row__top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: $space-2;
+}
+
+.control-row__top label,
+.control-row__top output {
+  font-family: $font-display;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.control-row__top output {
+  color: $color-emerald-deep;
+  font-variant-numeric: tabular-nums;
+}
+
+.control-row p {
+  margin: 0.25rem 0 $space-2;
+  color: $color-mineral;
+  font-size: 0.98rem;
+}
+
+.control-row input[type="range"] {
+  display: block;
+  width: 100%;
+  margin: 0;
+  accent-color: $color-emerald;
+}

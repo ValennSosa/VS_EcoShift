@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VS EcoShift — Simulador educativo de sostenibilidad urbana</title>
+  <meta name="description" content="VS EcoShift es un simulador educativo para explorar cómo las decisiones urbanas transforman una ciudad ficticia. No muestra mediciones ambientales reales.">
+  <meta name="theme-color" content="#0c342b">
+  <meta property="og:title" content="VS EcoShift — Simulador educativo de sostenibilidad urbana">
+  <meta property="og:description" content="Una ciudad ficticia que responde a decisiones de naturaleza, energía, movilidad y materiales.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_AR">
+  <link rel="icon" href="./assets/brand/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./node_modules/aos/dist/aos.css">
+  <link rel="stylesheet" href="./styles/style.css">
+</head>
+<body class="page" data-page="home">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <header class="site-header" data-app-header></header>
+  <main id="contenido" tabindex="-1">
+    <section class="hero">
+      <div class="container hero__grid">
+        <div>
+          <p class="eyebrow">Sostenibilidad urbana</p>
+          <h1 class="hero__title">Una ciudad ficticia que responde a tus decisiones.</h1>
+          <p class="lead">VS EcoShift es un simulador educativo. Vas a poder cambiar políticas de una ciudad imaginaria y leer consecuencias favorables y desfavorables. Esas lecturas no son mediciones ambientales reales.</p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="./simulador.html">Transformá tu ciudad</a>
+            <a class="btn btn--ghost" href="#como-funciona">Cómo funciona</a>
+          </div>
+        </div>
+        <figure class="city-stage">
+          <img src="./assets/city/city.svg" width="720" height="560" alt="Ciudad ficticia con parques, edificios de paneles solares, una senda para bicicletas y un transporte eléctrico.">
+          <figcaption class="city-stage__caption">Representación conceptual. La ciudad todavía no cambia con las decisiones.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="como-funciona">
+      <div class="container">
+        <p class="eyebrow">El recorrido</p>
+        <h2>Tres pasos, una sola simulación.</h2>
+        <p class="section-copy">El simulador va a reunir la ciudad, los controles y las lecturas en la misma pantalla. Cada movimiento recalculará el conjunto, no un indicador aislado.</p>
+        <div class="steps" data-aos="fade-up">
+          <article class="step">
+            <p class="step__index">01</p>
+            <h3>Ajustá una decisión</h3>
+            <p>Espacios verdes, energía, movilidad o materiales. Los controles van a partir de la ciudad completa.</p>
+          </article>
+          <article class="step">
+            <p class="step__index">02</p>
+            <h3>Mirá la ciudad</h3>
+            <p>La representación va a acompañar el cálculo: parques, paneles, bicicletas y el pulso de las zonas.</p>
+          </article>
+          <article class="step">
+            <p class="step__index">03</p>
+            <h3>Leé las consecuencias</h3>
+            <p>Una mejora puede convivir con un retroceso. El transporte eléctrico, por ejemplo, alivia emisiones y suma consumo.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tight" id="posibilidades">
+      <div class="container">
+        <p class="eyebrow">Qué vas a poder explorar</p>
+        <h2>Siete decisiones que se cruzan.</h2>
+        <div class="mosaic" data-aos="fade-up">
+          <article class="mosaic__lead">
+            <h3>Ningún control explica una sola lectura.</h3>
+            <p>El motor va a recalcular emisiones, aire, consumo, energía renovable, superficie verde, movilidad y reciclaje cada vez que cambie una variable.</p>
+          </article>
+          <article class="tile">
+            <h3>Territorio</h3>
+            <p>Espacios verdes para la superficie de la ciudad y el aire que la rodea.</p>
+          </article>
+          <article class="tile">
+            <h3>Energía</h3>
+            <p>Paneles solares y eficiencia. El transporte eléctrico puede empujar el consumo hacia arriba.</p>
+          </article>
+          <article class="tile">
+            <h3>Movimiento</h3>
+            <p>Flota eléctrica y bicicletas. Las dos participan; ninguna reemplaza sola a todo el transporte.</p>
+          </article>
+          <article class="tile">
+            <h3>Materiales</h3>
+            <p>Gestión de residuos y reciclaje. Hace falta el sistema de recolección y la separación.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="desafios">
+      <div class="container">
+        <p class="eyebrow">Desafíos</p>
+        <h2>Cuatro metas para la próxima simulación.</h2>
+        <p class="section-copy">Estas condiciones ya están definidas. El progreso se va a calcular con los valores completos del motor, siempre contra la Ciudad actual. Todavía no hay un resultado que cumplir.</p>
+        <div class="goals" data-aos="fade-up">
+          <a class="goal" href="./desafios.html#emisiones">
+            <span>01</span>
+            <h3>Bajar emisiones un 20%</h3>
+            <p>Respecto del valor inicial de Ciudad actual, no de una cifra redondeada en pantalla.</p>
+          </a>
+          <a class="goal" href="./desafios.html#renovable">
+            <span>02</span>
+            <h3>Llegar a 40 en energía renovable</h3>
+            <p>El umbral es el valor completo del indicador.</p>
+          </a>
+          <a class="goal" href="./desafios.html#superficie">
+            <span>03</span>
+            <h3>Sumar 15 puntos de superficie verde</h3>
+            <p>Son puntos del indicador, no un porcentaje relativo.</p>
+          </a>
+          <a class="goal" href="./desafios.html#movilidad">
+            <span>04</span>
+            <h3>Alcanzar 55 de movilidad sostenible</h3>
+            <p>Eléctrico y bicicleta se leen juntos.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer" data-app-footer></footer>
+  <script defer src="./node_modules/aos/dist/aos.js"></script>
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>

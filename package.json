@@ -1,0 +1,22 @@
+{
+  "name": "vs-ecoshift",
+  "version": "0.1.0",
+  "private": true,
+  "description": "VS EcoShift: simulador educativo de sostenibilidad urbana.",
+  "type": "module",
+  "scripts": {
+    "sass": "sass scss/main.scss styles/style.css --style=expanded --watch",
+    "sass:build": "sass scss/main.scss styles/style.css --style=compressed",
+    "start": "serve . -p 3010",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "aos": "^2.3.4",
+    "bootstrap": "^5.3.3",
+    "chart.js": "^4.4.7"
+  },
+  "devDependencies": {
+    "sass": "^1.83.0",
+    "serve": "^14.2.4"
+  }
+}

@@ -1,0 +1,188 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+.city-layout {
+  display: grid;
+  gap: $space-4;
+  margin-bottom: $space-4;
+}
+
+.city-stage {
+  padding: $space-3;
+  background:
+    linear-gradient(180deg, rgba(198, 239, 74, 0.08), transparent 8rem),
+    $color-emerald-deep;
+  border-radius: $radius-lg;
+  box-shadow: $shadow;
+}
+
+.city-stage img,
+.city-canvas {
+  width: 100%;
+  height: auto;
+  border-radius: calc(#{$radius-lg} - 0.4rem);
+}
+
+.city-canvas-wrap {
+  overflow: hidden;
+  border-radius: calc(#{$radius-lg} - 0.4rem);
+}
+
+.city-stage__caption {
+  margin: $space-3 $space-2 $space-1;
+  color: rgba(248, 251, 246, 0.78);
+  font-size: 0.98rem;
+}
+
+.city-zone-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  margin: $space-3 $space-1 0;
+}
+
+.city-zone-chip {
+  min-height: 2.4rem;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid rgba(248, 251, 246, 0.22);
+  border-radius: 999px;
+  background: transparent;
+  color: $color-white;
+  font-family: $font-display;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.city-zone-chip:hover,
+.city-zone-chip:focus-visible {
+  border-color: $color-lime;
+  color: $color-lime;
+}
+
+.city-zone-chip[aria-pressed="true"] {
+  background: $color-lime;
+  border-color: $color-lime;
+  color: $color-emerald-deep;
+}
+
+.city-zone {
+  outline: none;
+}
+
+.city-zone .zone-hit {
+  transition: fill-opacity $ease;
+}
+
+.city-zone:hover .zone-hit,
+.city-zone:focus-within .zone-hit {
+  fill-opacity: 0.1;
+}
+
+.city-zone.is-selected .zone-hit {
+  fill: $color-lime;
+  fill-opacity: 0.16;
+}
+
+.city-zone.is-selected .zone-label {
+  fill: $color-white;
+}
+
+.zone-panel .zone-subtitle {
+  margin-top: $space-4;
+  margin-bottom: $space-2;
+  font-size: 1rem;
+}
+
+.zone-level-pill {
+  display: inline-flex;
+  margin: $space-2 0 0;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(14, 122, 88, 0.1);
+  color: $color-emerald-deep;
+  font-family: $font-display;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.zone-level-pill[data-level="low"] {
+  background: rgba(62, 81, 72, 0.12);
+  color: $color-mineral;
+}
+
+.zone-level-pill[data-level="high"] {
+  background: rgba(198, 239, 74, 0.35);
+  color: $color-emerald-deep;
+}
+
+.zone-metric {
+  display: flex;
+  justify-content: space-between;
+  gap: $space-2;
+  font-family: $font-display;
+  font-weight: 600;
+}
+
+.zone-metrics p {
+  margin: 0.2rem 0 0;
+}
+
+.city-canvas [data-show="medium"],
+.city-canvas [data-show="high"] {
+  display: none;
+}
+
+.city-canvas[data-v-green-spaces="medium"] [data-feature="vegetation"][data-show="medium"],
+.city-canvas[data-v-green-spaces="high"] [data-feature="vegetation"][data-show="medium"],
+.city-canvas[data-v-green-spaces="high"] [data-feature="vegetation"][data-show="high"] {
+  display: inline;
+}
+
+.city-canvas[data-v-solar-energy="medium"] [data-feature="solar"][data-show="medium"],
+.city-canvas[data-v-solar-energy="high"] [data-feature="solar"][data-show="medium"],
+.city-canvas[data-v-solar-energy="high"] [data-feature="solar"][data-show="high"] {
+  display: inline;
+}
+
+.city-canvas[data-v-energy-efficiency="medium"] [data-feature="efficiency"][data-show="medium"],
+.city-canvas[data-v-energy-efficiency="high"] [data-feature="efficiency"][data-show="medium"],
+.city-canvas[data-v-energy-efficiency="high"] [data-feature="efficiency"][data-show="high"] {
+  display: inline;
+}
+
+.city-canvas[data-v-recycling="medium"] [data-feature="recycling"][data-show="medium"],
+.city-canvas[data-v-recycling="high"] [data-feature="recycling"][data-show="medium"],
+.city-canvas[data-v-recycling="high"] [data-feature="recycling"][data-show="high"] {
+  display: inline;
+}
+
+.city-canvas[data-v-waste-management="medium"] [data-feature="waste"][data-show="medium"],
+.city-canvas[data-v-waste-management="high"] [data-feature="waste"][data-show="medium"],
+.city-canvas[data-v-waste-management="high"] [data-feature="waste"][data-show="high"] {
+  display: inline;
+}
+
+.city-canvas[data-v-electric-transport="medium"] [data-feature="electric"][data-show="medium"],
+.city-canvas[data-v-electric-transport="high"] [data-feature="electric"][data-show="medium"],
+.city-canvas[data-v-electric-transport="high"] [data-feature="electric"][data-show="high"] {
+  display: inline;
+}
+
+.city-canvas[data-v-bicycle-use="medium"] [data-feature="bicycle"][data-show="medium"],
+.city-canvas[data-v-bicycle-use="high"] [data-feature="bicycle"][data-show="medium"],
+.city-canvas[data-v-bicycle-use="high"] [data-feature="bicycle"][data-show="high"] {
+  display: inline;
+}
+
+@include respond-up($bp-lg) {
+  .city-layout {
+    grid-template-columns: minmax(0, 1.45fr) minmax(18rem, 0.8fr);
+    align-items: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .city-zone .zone-hit {
+    transition: none;
+  }
+}

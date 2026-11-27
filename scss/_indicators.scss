@@ -1,0 +1,65 @@
+@use "variables" as *;
+
+.score-line {
+  margin: 0 0 $space-3;
+  padding: $space-3;
+  border-radius: $radius-sm;
+  background: rgba(12, 52, 43, 0.05);
+  color: $color-emerald-deep;
+  font-family: $font-display;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.reading-row__top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: $space-2;
+}
+
+.reading-row__name,
+.reading-row__value {
+  font-family: $font-display;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.reading-row__value {
+  color: $color-emerald-deep;
+  font-variant-numeric: tabular-nums;
+}
+
+.reading-row p {
+  margin: 0.25rem 0 0;
+  color: $color-mineral;
+  font-size: 0.98rem;
+}
+
+.reading-change {
+  margin-top: 0.35rem;
+  font-family: $font-display;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.reading-change--same {
+  color: $color-mineral;
+}
+
+.reading-change--improved {
+  color: $color-emerald;
+}
+
+.reading-change--regressed {
+  color: #8a3b2a;
+}
+
+.status-note {
+  margin-bottom: $space-4;
+  padding: $space-3 $space-4;
+  border-left: 3px solid $color-lime;
+  background: rgba(14, 122, 88, 0.06);
+  border-radius: 0 $radius-sm $radius-sm 0;
+}

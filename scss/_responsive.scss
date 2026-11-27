@@ -1,0 +1,20 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+@include respond-up($bp-xl) {
+  .hero {
+    padding-top: $space-6;
+  }
+}
+
+@media (max-width: 23.5rem) {
+  .hero__actions,
+  .cluster {
+    align-items: stretch;
+  }
+
+  .hero__actions .btn,
+  .cluster .btn {
+    width: 100%;
+  }
+}

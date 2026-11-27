@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Escenarios — VS EcoShift</title>
+  <meta name="description" content="Escenarios de VS EcoShift: cuatro presets inmutables y el espacio para los escenarios propios.">
+  <meta name="theme-color" content="#0c342b">
+  <meta property="og:title" content="Escenarios — VS EcoShift">
+  <meta property="og:description" content="Ciudad actual, sostenible, tecnológica y verde. Los escenarios propios se van a guardar más adelante.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_AR">
+  <link rel="icon" href="./assets/brand/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./styles/style.css">
+</head>
+<body class="page" data-page="scenarios">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <header class="site-header" data-app-header></header>
+  <main id="contenido" tabindex="-1">
+    <header class="page-intro">
+      <div class="container">
+        <p class="eyebrow">Escenarios</p>
+        <h1 class="page-intro__title">Cuatro ciudades de referencia</h1>
+        <p class="lead">Los presets describen rumbos distintos de la misma ciudad ficticia. No se pueden modificar. Los escenarios propios van a nacer del borrador del simulador.</p>
+      </div>
+    </header>
+    <section class="section section--tight" aria-labelledby="presets-titulo">
+      <div class="container">
+        <h2 id="presets-titulo">Presets inmutables</h2>
+        <div class="preset-grid">
+          <article class="preset-card preset-card--base">
+            <h3>Ciudad actual</h3>
+            <p>Punto de partida y referencia de todas las comparaciones. También es la base de los desafíos.</p>
+          </article>
+          <article class="preset-card">
+            <h3>Ciudad sostenible</h3>
+            <p>Equilibra territorio, energía, movilidad y materiales. Está pensada para cumplir las cuatro metas.</p>
+          </article>
+          <article class="preset-card">
+            <h3>Ciudad tecnológica</h3>
+            <p>Prioriza transporte eléctrico, solar y eficiencia. Deja más corta la superficie verde.</p>
+          </article>
+          <article class="preset-card">
+            <h3>Ciudad verde</h3>
+            <p>Prioriza parques, bicicleta y recuperación de materiales. La energía renovable no es su fuerte.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section class="section section--tight" aria-labelledby="propios-titulo">
+      <div class="container">
+        <div class="empty-state">
+          <h2 id="propios-titulo">Escenarios propios</h2>
+          <p>Todavía no hay escenarios guardados. Más adelante vas a poder crear uno desde el borrador, cargarlo, modificar sus variables, guardar los cambios sobre ese mismo escenario o guardarlos como uno nuevo.</p>
+          <p>También van a poder renombrarse, eliminarse y compararse de a dos. El límite previsto es de ocho escenarios propios.</p>
+          <p class="cluster">
+            <a class="btn btn--primary" href="./simulador.html">Ir al simulador</a>
+            <a class="btn btn--ghost" href="./resultado.html">Ver la pantalla de resultado</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer" data-app-footer></footer>
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>

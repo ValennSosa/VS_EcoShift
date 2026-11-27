@@ -1,0 +1,12 @@
+@use "variables" as *;
+
+@mixin respond-up($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin focus-ring {
+  outline: 3px solid $color-emerald;
+  outline-offset: 3px;
+}

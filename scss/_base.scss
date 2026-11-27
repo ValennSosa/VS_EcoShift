@@ -1,0 +1,149 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgba(198, 239, 74, 0.18), transparent 28rem),
+    $color-canvas;
+  color: $color-ink;
+  font-family: $font-body;
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: $color-emerald-deep;
+}
+
+a:hover {
+  color: $color-emerald;
+}
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  @include focus-ring;
+}
+
+.skip-link {
+  position: absolute;
+  left: $space-3;
+  top: -4rem;
+  z-index: 40;
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+  background: $color-lime;
+  color: $color-emerald-deep;
+  font-family: $font-display;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: $space-3;
+}
+
+#contenido:focus {
+  outline: none;
+}
+
+#contenido:focus-visible {
+  outline: none;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.7rem 1.25rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-family: $font-display;
+  font-size: 0.98rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.btn--primary {
+  background: $color-emerald;
+  color: $color-white;
+}
+
+.btn--primary:hover {
+  background: $color-emerald-deep;
+  color: $color-white;
+}
+
+.btn--ghost {
+  background: transparent;
+  border-color: rgba(16, 36, 28, 0.22);
+  color: $color-ink;
+}
+
+.btn--ghost:hover {
+  border-color: $color-emerald;
+  color: $color-emerald-deep;
+}
+
+.disclaimer {
+  margin: 0;
+  color: $color-mineral;
+  font-size: 0.98rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .btn,
+  .step,
+  .preset-card,
+  .goal,
+  .nav-link {
+    transition: background-color $ease, color $ease, border-color $ease, transform $ease;
+  }
+
+  .btn:hover,
+  .step:hover,
+  .preset-card:hover,
+  .goal:hover {
+    transform: translateY(-2px);
+  }
+}

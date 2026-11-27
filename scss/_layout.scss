@@ -1,0 +1,87 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+.page {
+  min-height: 100vh;
+}
+
+.section {
+  padding: $space-6 0;
+}
+
+.section--tight {
+  padding-top: $space-5;
+}
+
+.page-intro {
+  padding: $space-6 0 $space-4;
+}
+
+.page-intro__title {
+  max-width: 16ch;
+}
+
+.section-actions {
+  margin-top: $space-4;
+}
+
+.panel {
+  height: 100%;
+  padding: $space-4;
+  background: $color-white;
+  border: 1px solid $color-line;
+  border-radius: $radius;
+  box-shadow: $shadow;
+}
+
+.panel__label {
+  margin-bottom: $space-1;
+  color: $color-emerald;
+  font-family: $font-display;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.quiet-list {
+  display: grid;
+  gap: $space-3;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.quiet-list li,
+.definition {
+  padding-top: $space-3;
+  border-top: 1px solid $color-line;
+}
+
+.quiet-list strong,
+.definition dt {
+  display: block;
+  font-family: $font-display;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.definition {
+  display: grid;
+  gap: 0.2rem;
+  margin: 0;
+}
+
+.definition dd {
+  margin: 0;
+  color: $color-mineral;
+}
+
+@include respond-up($bp-lg) {
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-4;
+    align-items: stretch;
+  }
+}
