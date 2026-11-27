@@ -1,4 +1,4 @@
-const READINGS = [
+export const READINGS = [
   {
     key: "emissions",
     label: "Emisiones de CO₂",
@@ -111,11 +111,56 @@ export function updateSummary(summary, result, baseline) {
   summary.textContent = `Valoración educativa ${numberFormat.format(result.score)}. ${improvements} mejoras y ${regressions} retrocesos respecto de Ciudad actual.`;
 }
 
-function describeChange(current, baselineValue, direction) {
+/** Comparación educativa contra Ciudad actual. Usa valores completos del motor. */
+export function buildComparisonRows(result, baseline) {
+  return READINGS.map((reading) => {
+    const current = result.indicators[reading.key];
+    const reference = baseline.indicators[reading.key];
+    const change = describeChange(current, reference, reading.direction);
+    return {
+      key: reading.key,
+      label: reading.label,
+      direction: reading.direction,
+      current,
+      baseline: reference,
+      displayCurrent: numberFormat.format(current),
+      displayBaseline: numberFormat.format(reference),
+      change,
+      changeText: changeText(change),
+    };
+  });
+}
+
+export function summarizeComparison(rows) {
+  const improvements = rows.filter((row) => row.change.status === "improved").map((row) => row.label);
+  const regressions = rows.filter((row) => row.change.status === "regressed").map((row) => row.label);
+  const same = rows.filter((row) => row.change.status === "same").map((row) => row.label);
+
+  return {
+    improvements,
+    regressions,
+    same,
+    text: comparisonNarrative(improvements, regressions, same),
+  };
+}
+
+export function describeChange(current, baselineValue, direction) {
   const delta = current - baselineValue;
   if (Math.abs(delta) < 1e-9) return { status: "same", label: "Sin cambios", delta };
   const improved = direction === "lower" ? delta < 0 : delta > 0;
   return { status: improved ? "improved" : "regressed", label: improved ? "Mejora" : "Retroceso", delta };
+}
+
+function comparisonNarrative(improvements, regressions, same) {
+  if (!improvements.length && !regressions.length) {
+    return "Sin cambios respecto de Ciudad actual en los siete indicadores.";
+  }
+
+  const parts = [];
+  if (improvements.length) parts.push(`Mejoran: ${improvements.join(", ")}.`);
+  if (regressions.length) parts.push(`Retroceden: ${regressions.join(", ")}.`);
+  if (same.length) parts.push(`Sin cambios: ${same.join(", ")}.`);
+  return parts.join(" ");
 }
 
 function paintChange(node, change) {

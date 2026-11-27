@@ -1,5 +1,6 @@
 import { VARIABLE_KEYS, simulate } from "../sim/engine.js";
 import { getBaselineVariables, getVariables, initState, resetVariables, setVariables } from "../state/store.js";
+import { initCharts, updateCharts } from "../ui/charts.js";
 import { initCity, updateCity } from "../ui/city.js";
 import { renderControls, syncControls } from "../ui/controls.js";
 import { renderIndicators, updateIndicators, updateSummary } from "../ui/indicators.js";
@@ -13,6 +14,10 @@ export async function initSimulator() {
   const zoneLive = document.querySelector("[data-live-zone]");
   const stage = document.querySelector("[data-city-stage]");
   const zonePanel = document.querySelector("[data-zone-panel]");
+  const profileCanvas = document.querySelector("[data-chart-profile]");
+  const compareCanvas = document.querySelector("[data-chart-compare]");
+  const profileAlt = document.querySelector("[data-chart-profile-alt]");
+  const compareAlt = document.querySelector("[data-chart-compare-alt]");
   if (!bar || !controls || !indicators || !score || !summary || !zoneLive || !stage || !zonePanel) return;
 
   try {
@@ -31,11 +36,19 @@ export async function initSimulator() {
       liveRegion: zoneLive,
     });
 
+    initCharts({
+      profileCanvas,
+      compareCanvas,
+      profileText: profileAlt,
+      compareText: compareAlt,
+    });
+
     function publish(rawVariables, announce) {
       const result = simulate(rawVariables);
       setVariables(result.variables);
       syncControls(controls, result.variables);
       updateIndicators(indicators, score, result, baselineResult);
+      updateCharts(result, baselineResult);
       updateCity(result.variables);
       markSelectedPreset(bar, presets, result.variables);
       if (announce) updateSummary(summary, result, baselineResult);
@@ -63,6 +76,7 @@ export async function initSimulator() {
     indicators.replaceChildren(messageItem("Las lecturas no están disponibles."));
     stage.replaceChildren(message("No se pudo cargar la ciudad interactiva."));
     score.textContent = "";
+    if (compareAlt) compareAlt.textContent = "Los gráficos no están disponibles.";
   }
 }
 

@@ -16,6 +16,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="./styles/style.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "chart.js": "./node_modules/chart.js/dist/chart.js",
+      "chart.js/auto": "./node_modules/chart.js/auto/auto.js",
+      "@kurkle/color": "./node_modules/@kurkle/color/dist/color.esm.js"
+    }
+  }
+  </script>
 </head>
 <body class="page" data-page="simulator">
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -69,6 +78,33 @@
             <ul class="quiet-list" data-indicators></ul>
           </section>
         </div>
+
+        <section class="charts-section" aria-labelledby="graficos-titulo">
+          <p class="panel__label">Lectura visual</p>
+          <h2 id="graficos-titulo">Gráficos de la simulación</h2>
+          <p class="charts-section__lead">Los valores salen del mismo motor que las lecturas. La escala es siempre de 0 a 100. Emisiones y consumo energético mejoran cuando bajan; el resto, cuando suben.</p>
+
+          <div class="charts-grid">
+            <figure class="chart-panel">
+              <figcaption id="perfil-titulo">Perfil de indicadores</figcaption>
+              <p class="chart-panel__note">Simulación actual. Una barra por lectura.</p>
+              <div class="chart-frame">
+                <canvas id="chart-profile" data-chart-profile aria-labelledby="perfil-titulo" role="img"></canvas>
+              </div>
+              <p class="u-visually-hidden" data-chart-profile-alt></p>
+            </figure>
+
+            <figure class="chart-panel">
+              <figcaption id="comparacion-titulo">Comparación con Ciudad actual</figcaption>
+              <p class="chart-panel__note">Barras agrupadas: referencia fija frente a la configuración que estás simulando.</p>
+              <div class="chart-frame chart-frame--tall">
+                <canvas id="chart-compare" data-chart-compare aria-labelledby="comparacion-titulo" role="img"></canvas>
+              </div>
+              <p class="chart-compare-text" data-chart-compare-alt></p>
+            </figure>
+          </div>
+        </section>
+
         <p class="cluster section-actions">
           <a class="btn btn--ghost" href="./escenarios.html">Ver escenarios</a>
           <a class="btn btn--ghost" href="./desafios.html">Ver desafíos</a>

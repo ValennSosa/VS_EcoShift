@@ -12,6 +12,7 @@ Simulador educativo de sostenibilidad urbana. Una ciudad ficticia responde a sie
 - Recalcular siete indicadores con un motor puro y determinista.
 - Comparar siempre contra el preset inmutable **Ciudad actual**.
 - Explorar seis zonas interactivas en un SVG (residencial, comercial, industrial, espacios verdes, transporte y energía).
+- Visualizar el perfil de indicadores y la comparación con Ciudad actual en gráficos Chart.js.
 - Cargar presets de referencia: Ciudad actual, sostenible, tecnológica y verde.
 
 ## Estado del proyecto
@@ -21,7 +22,8 @@ Simulador educativo de sostenibilidad urbana. Una ciudad ficticia responde a sie
 | 1 | Estructura, páginas e identidad visual | Completa |
 | 2 | Motor de simulación, controles e indicadores | Completa |
 | 3 | Ciudad SVG interactiva y estados por zona | Completa |
-| 4 | Escenarios propios, desafíos y resultado | Pendiente |
+| 4 | Gráficos Chart.js y comparación visual | Completa |
+| 5 | Escenarios propios, desafíos y resultado | Pendiente |
 
 ## Stack
 
@@ -30,7 +32,7 @@ Simulador educativo de sostenibilidad urbana. Una ciudad ficticia responde a sie
 - Sass modular (`@use` → `styles/style.css`)
 - JavaScript ES Modules
 - AOS (animaciones al scroll)
-- Chart.js (reservado para etapas siguientes)
+- Chart.js (perfil de indicadores y comparación)
 - Datos locales en JSON
 - Pruebas con `node --test`
 
