@@ -23,7 +23,8 @@ Simulador educativo de sostenibilidad urbana. Una ciudad ficticia responde a sie
 | 2 | Motor de simulación, controles e indicadores | Completa |
 | 3 | Ciudad SVG interactiva y estados por zona | Completa |
 | 4 | Gráficos Chart.js y comparación visual | Completa |
-| 5 | Escenarios propios, desafíos y resultado | Pendiente |
+| 5 | Escenarios propios y persistencia local | Completa |
+| 6 | Desafíos y pantalla de resultado | Pendiente |
 
 ## Stack
 
