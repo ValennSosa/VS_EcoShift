@@ -1,0 +1,56 @@
+{
+  "presets": [
+    {
+      "id": "ciudad-actual",
+      "name": "Ciudad actual",
+      "variables": {
+        "greenSpaces": 35,
+        "electricTransport": 25,
+        "solarEnergy": 20,
+        "energyEfficiency": 40,
+        "wasteManagement": 35,
+        "bicycleUse": 25,
+        "recycling": 30
+      }
+    },
+    {
+      "id": "ciudad-sostenible",
+      "name": "Ciudad sostenible",
+      "variables": {
+        "greenSpaces": 62,
+        "electricTransport": 58,
+        "solarEnergy": 58,
+        "energyEfficiency": 70,
+        "wasteManagement": 68,
+        "bicycleUse": 60,
+        "recycling": 72
+      }
+    },
+    {
+      "id": "ciudad-tecnologica",
+      "name": "Ciudad tecnológica",
+      "variables": {
+        "greenSpaces": 40,
+        "electricTransport": 85,
+        "solarEnergy": 80,
+        "energyEfficiency": 82,
+        "wasteManagement": 48,
+        "bicycleUse": 35,
+        "recycling": 45
+      }
+    },
+    {
+      "id": "ciudad-verde",
+      "name": "Ciudad verde",
+      "variables": {
+        "greenSpaces": 88,
+        "electricTransport": 40,
+        "solarEnergy": 48,
+        "energyEfficiency": 58,
+        "wasteManagement": 60,
+        "bicycleUse": 82,
+        "recycling": 70
+      }
+    }
+  ]
+}
