@@ -1,7 +1,12 @@
 node_modules/
+.vercel-out/
+.vercel/
 .DS_Store
 Thumbs.db
 *.log
+.env*
 Indicación_inicial.txt
 prompt 1.txt
 prompt*.txt
+
+.vercel
