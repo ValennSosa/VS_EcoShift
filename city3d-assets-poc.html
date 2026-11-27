@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PoC assets 3D — VS EcoShift</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0c342b">
+  <link rel="icon" href="./assets/brand/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles/style.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./node_modules/three/build/three.module.js",
+      "three/addons/": "./node_modules/three/examples/jsm/"
+    }
+  }
+  </script>
+  <style>
+    .poc-page {
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse at 20% 0%, rgba(31, 170, 110, 0.18), transparent 50%),
+        linear-gradient(160deg, #0c342b 0%, #10241c 55%, #0a221c 100%);
+      color: #f8fbf6;
+    }
+    .poc-wrap {
+      width: min(1100px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 1.5rem 0 2.5rem;
+      display: grid;
+      gap: 1rem;
+    }
+    .poc-wrap h1 {
+      margin: 0;
+      font-family: Sora, sans-serif;
+      font-size: clamp(1.4rem, 2vw, 1.9rem);
+    }
+    .poc-wrap p {
+      margin: 0;
+      max-width: 60ch;
+      color: rgba(248, 251, 246, 0.82);
+    }
+    .poc-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.25rem;
+      font-size: 0.92rem;
+    }
+    .poc-stage {
+      height: min(70vh, 640px);
+      border: 1px solid rgba(248, 251, 246, 0.16);
+      border-radius: 0.75rem;
+      overflow: hidden;
+      background: #0c342b;
+    }
+    .city3d-poc-host,
+    .city3d-poc-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .poc-note {
+      font-size: 0.88rem;
+      color: rgba(248, 251, 246, 0.7);
+    }
+    .poc-note a { color: #c6ef4a; }
+  </style>
+</head>
+<body class="poc-page">
+  <main class="poc-wrap">
+    <p class="eyebrow" style="margin:0;color:#c6ef4a;font-family:Sora,sans-serif;font-weight:600;letter-spacing:.04em;text-transform:uppercase;font-size:.75rem;">R0 · Fundaciones</p>
+    <h1>Prueba de concepto — assets GLTF/PBR</h1>
+    <p>
+      Escena aislada para validar carga, materiales, iluminación IBL y dispose.
+      No modifica la ciudad del simulador.
+    </p>
+    <div class="poc-meta" aria-live="polite">
+      <span data-city3d-poc-status>Preparando…</span>
+      <span data-city3d-poc-fps>— fps</span>
+    </div>
+    <div class="poc-stage" data-city3d-poc></div>
+    <p class="poc-note">
+      Modelos CC0 de <a href="https://polyhaven.com/a/modular_urban_apartments_facade">Poly Haven — Modular Urban Apartments Facade</a>
+      y <a href="https://polyhaven.com/a/potted_plant_02">Potted Plant 02</a>.
+      HDRI: Kloppenheim 06 Pure Sky. Créditos en <code>assets/city3d/CREDITS.md</code>.
+    </p>
+    <p class="poc-note"><a href="./simulador.html">← Volver al simulador</a></p>
+  </main>
+  <script type="module" src="./js/city3d/mount-assets-poc.js"></script>
+</body>
+</html>

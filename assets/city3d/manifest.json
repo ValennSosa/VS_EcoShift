@@ -1,0 +1,225 @@
+{
+  "version": 1,
+  "generated": "2026-11-27",
+  "licensePolicy": "CC0-only-verified",
+  "assets": [
+    {
+      "id": "residential-facade-apartments",
+      "kind": "model",
+      "category": "residential",
+      "label": "Modular Urban Apartments Facade",
+      "url": "./models/modular_urban_apartments_facade/modular_urban_apartments_facade_1k.gltf",
+      "format": "gltf",
+      "license": "CC0-1.0",
+      "source": "https://polyhaven.com/a/modular_urban_apartments_facade",
+      "author": "James Ray Cock",
+      "polycountApprox": 118215,
+      "resolution": "1k",
+      "textures": true,
+      "poc": true,
+      "normalize": {
+        "targetSize": 8,
+        "groundToOrigin": true,
+        "axis": "y-up"
+      },
+      "notes": "Fachada modular residencial contemporánea con PBR. Pieza de calidad arquitectónica para PoC; demasiado densa para instanciar en masa sin LOD/Draco."
+    },
+    {
+      "id": "vegetation-potted-plant-02",
+      "kind": "model",
+      "category": "vegetation",
+      "label": "Potted Plant 02",
+      "url": "./models/potted_plant_02/potted_plant_02_1k.gltf",
+      "format": "gltf",
+      "license": "CC0-1.0",
+      "source": "https://polyhaven.com/a/potted_plant_02",
+      "author": "Poly Haven",
+      "polycountApprox": 69806,
+      "resolution": "1k",
+      "textures": true,
+      "poc": true,
+      "normalize": {
+        "targetSize": 1.6,
+        "groundToOrigin": true,
+        "axis": "y-up"
+      },
+      "notes": "Vegetación con volumen y materiales PBR. Demuestra calidad frente a esferas procedurales."
+    },
+    {
+      "id": "hdri-kloppenheim-06-puresky",
+      "kind": "hdri",
+      "category": "lighting",
+      "label": "Kloppenheim 06 Pure Sky",
+      "url": "./hdri/kloppenheim_06_puresky_1k.hdr",
+      "format": "hdr",
+      "license": "CC0-1.0",
+      "source": "https://polyhaven.com/a/kloppenheim_06_puresky",
+      "author": "Poly Haven",
+      "resolution": "1k",
+      "poc": true,
+      "notes": "IBL diurna limpia para evaluar materiales PBR en la PoC."
+    },
+    {
+      "id": "trama-asphalt-033",
+      "kind": "texture",
+      "category": "trama",
+      "label": "Asphalt033",
+      "url": "./textures/asphalt/Asphalt033_1K-JPG_Color.jpg",
+      "format": "jpg",
+      "license": "CC0-1.0",
+      "source": "https://ambientcg.com/a/Asphalt033",
+      "resolution": "1k",
+      "poc": false,
+      "notes": "Calzadas de la trama urbana R1."
+    },
+    {
+      "id": "trama-paving-055",
+      "kind": "texture",
+      "category": "trama",
+      "label": "PavingStones055",
+      "url": "./textures/sidewalk/PavingStones055_1K-JPG_Color.jpg",
+      "format": "jpg",
+      "license": "CC0-1.0",
+      "source": "https://ambientcg.com/a/PavingStones055",
+      "resolution": "1k",
+      "poc": false
+    },
+    {
+      "id": "trama-grass-001",
+      "kind": "texture",
+      "category": "trama",
+      "label": "Grass001",
+      "url": "./textures/grass/Grass001_1K-JPG_Color.jpg",
+      "format": "jpg",
+      "license": "CC0-1.0",
+      "source": "https://ambientcg.com/a/Grass001",
+      "resolution": "1k",
+      "poc": false
+    },
+    {
+      "id": "trama-concrete-034",
+      "kind": "texture",
+      "category": "trama",
+      "label": "Concrete034",
+      "url": "./textures/lot/Concrete034_1K-JPG_Color.jpg",
+      "format": "jpg",
+      "license": "CC0-1.0",
+      "source": "https://ambientcg.com/a/Concrete034",
+      "resolution": "1k",
+      "poc": false
+    },
+    {
+      "id": "vegetation-shrub-04",
+      "kind": "model",
+      "category": "vegetation",
+      "label": "Shrub 04",
+      "url": "./models/shrub_04/shrub_04_1k.gltf",
+      "format": "gltf",
+      "license": "CC0-1.0",
+      "source": "https://polyhaven.com/a/shrub_04",
+      "author": "Poly Haven",
+      "resolution": "1k",
+      "textures": true,
+      "poc": false,
+      "normalize": { "targetSize": 0.95, "groundToOrigin": true, "axis": "y-up" },
+      "notes": "Arbusto urbano liviano para canteros y bordes de parque (R3)."
+    },
+    {
+      "id": "vegetation-fern-02",
+      "kind": "model",
+      "category": "vegetation",
+      "label": "Fern 02",
+      "url": "./models/fern_02/fern_02_1k.gltf",
+      "format": "gltf",
+      "license": "CC0-1.0",
+      "source": "https://polyhaven.com/a/fern_02",
+      "author": "Poly Haven",
+      "resolution": "1k",
+      "textures": true,
+      "poc": false,
+      "normalize": { "targetSize": 0.55, "groundToOrigin": true, "axis": "y-up" },
+      "notes": "Helecho ornamental para canteros y cubiertas verdes (R3)."
+    },
+    {
+      "id": "vegetation-potted-plant-04",
+      "kind": "model",
+      "category": "vegetation",
+      "label": "Potted Plant 04",
+      "url": "./models/potted_plant_04/potted_plant_04_1k.gltf",
+      "format": "gltf",
+      "license": "CC0-1.0",
+      "source": "https://polyhaven.com/a/potted_plant_04",
+      "author": "Poly Haven",
+      "resolution": "1k",
+      "textures": true,
+      "poc": false,
+      "normalize": { "targetSize": 0.7, "groundToOrigin": true, "axis": "y-up" },
+      "notes": "Maceta urbana para accesos y terrazas (R3)."
+    },
+    {
+      "id": "landscape-bark-012",
+      "kind": "texture",
+      "category": "landscape",
+      "label": "Bark012",
+      "url": "./textures/bark/Bark012_1K-JPG_Color.jpg",
+      "format": "jpg",
+      "license": "CC0-1.0",
+      "source": "https://ambientcg.com/a/Bark012",
+      "resolution": "1k",
+      "poc": false,
+      "notes": "Corteza PBR para troncos procedurales."
+    },
+    {
+      "id": "landscape-foliage-scattered-008",
+      "kind": "texture",
+      "category": "landscape",
+      "label": "ScatteredLeaves008",
+      "url": "./textures/foliage/ScatteredLeaves008_1K-JPG_Color.jpg",
+      "format": "jpg",
+      "license": "CC0-1.0",
+      "source": "https://ambientcg.com/a/ScatteredLeaves008",
+      "resolution": "1k",
+      "poc": false,
+      "notes": "Follaje PBR para copas icosaédricas."
+    },
+    {
+      "id": "landscape-metal-032",
+      "kind": "texture",
+      "category": "landscape",
+      "label": "Metal032",
+      "url": "./textures/metal/Metal032_1K-JPG_Color.jpg",
+      "format": "jpg",
+      "license": "CC0-1.0",
+      "source": "https://ambientcg.com/a/Metal032",
+      "resolution": "1k",
+      "poc": false,
+      "notes": "Metal urbano para mobiliario y estructuras."
+    }
+  ],
+  "candidatesNotBundled": [
+    {
+      "id": "industrial-facade-factory",
+      "source": "https://polyhaven.com/a/modular_factory_facade",
+      "license": "CC0-1.0",
+      "reason": "Calidad adecuada (~16.8 MB / 175k tris @1k). Reservado para R2 industrial."
+    },
+    {
+      "id": "urban-fire-escape",
+      "source": "https://polyhaven.com/a/modular_fire_escape",
+      "license": "CC0-1.0",
+      "reason": "Detalle urbano (~4.6 MB / 11k tris). Candidato a props."
+    },
+    {
+      "id": "kenney-city-kit-commercial",
+      "source": "https://kenney.nl/assets/city-kit-commercial",
+      "license": "CC0-1.0",
+      "reason": "Descartado para dirección estética: low-poly flat, sin PBR ni fachadas elaboradas."
+    },
+    {
+      "id": "polyhaven-tree-small-02",
+      "source": "https://polyhaven.com/a/tree_small_02",
+      "license": "CC0-1.0",
+      "reason": "Calidad fotoreal, peso inviabile (~96 MB / 4.6M tris) sin retopo."
+    }
+  ]
+}
