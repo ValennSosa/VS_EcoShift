@@ -61,6 +61,7 @@ export async function initSimulator() {
       stage,
       panel: zonePanel,
       liveRegion: zoneLive,
+      variables: getVariables(),
     });
 
     initCharts({

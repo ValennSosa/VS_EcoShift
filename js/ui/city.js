@@ -24,7 +24,7 @@ let pageHideBound = null;
 const CITY_VIEWBOX_WIDTH = 920;
 const LABEL_SCREEN_PX = 14;
 
-export async function initCity({ stage, panel: panelNode, liveRegion, onSelect }) {
+export async function initCity({ stage, panel: panelNode, liveRegion, onSelect, variables = null }) {
   if (!stage || !panelNode) return null;
 
   disposeCityView();
@@ -90,7 +90,7 @@ export async function initCity({ stage, panel: panelNode, liveRegion, onSelect }
       }
       if (forceFail) throw new Error("Fallo forzado de inicialización 3D");
       const { createCity3D } = await import("../city3d/index.js");
-      city3d = createCity3D({ host: viewport });
+      city3d = await createCity3D({ host: viewport });
       viewMode = "3d";
       modeNote.textContent = "Vista 3D de la ciudad";
       resetBtn.hidden = false;
@@ -113,6 +113,9 @@ export async function initCity({ stage, panel: panelNode, liveRegion, onSelect }
 
   mountZoneChips(viewMode === "svg");
   renderPanel(null);
+
+  // Sincronizar ciudad con el estado del simulador (persistido o inicial) sin flash genérico.
+  if (variables) updateCity(variables);
 
   pageHideBound = () => disposeCityView();
   window.addEventListener("pagehide", pageHideBound, { once: true });
